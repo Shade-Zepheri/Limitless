@@ -61,13 +61,13 @@ static void HomeControllerReachabilityCallback(SCNetworkReachabilityRef reachabi
     [alert show];
 }
 
-- (UIBarButtonItem *) leftButton {
-    return [[[UIBarButtonItem alloc]
-             initWithTitle:UCLocalize("ABOUT")
-             style:UIBarButtonItemStylePlain
-             target:self
-             action:@selector(aboutButtonClicked)
-             ] autorelease];
+- (UIBarButtonItem *) rightButton {
+    UIImage *reloadImage = [UIImage imageNamed:@"reload.png"];
+    UIButton *reloadButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    reloadButton.bounds = CGRectMake(0, 0, reloadImage.size.width, reloadImage.size.height);
+    [reloadButton setImage:reloadImage forState:UIControlStateNormal];
+    [reloadButton addTarget:self action:@selector(aboutButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    return [[[UIBarButtonItem alloc] initWithCustomView:reloadButton] autorelease];
 }
 
 @end
