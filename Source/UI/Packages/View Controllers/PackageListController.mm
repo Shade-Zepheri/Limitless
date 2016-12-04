@@ -198,7 +198,7 @@
     UITableViewRowAction *addToFavoritesAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
         
         [database_ addPackageToFavoritesList:package];
-        [list_ reloadData];
+        [self reloadData];
         
     }];
     [addToFavoritesAction _setButton:favoritesButton];
@@ -300,8 +300,10 @@ reload:
     }
     
     @synchronized (database_) {
-        if (era_ != [database_ era])
+        if (era_ != [database_ era]) {
             goto reload;
+        }
+        
         reloading_ = 0;
         
         thumbs_ = nil;
@@ -309,9 +311,9 @@ reload:
         
         packages_ = packages;
         
-        if ([self showsSections])
+        if ([self showsSections]) {
             sections_ = [self sectionsForPackages:packages];
-        else {
+        } else {
             Section *section([[[Section alloc] initWithName:nil row:0 localize:NO] autorelease]);
             [section setCount:[packages_ count]];
             sections_ = [NSArray arrayWithObject:section];

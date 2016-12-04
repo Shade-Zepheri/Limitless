@@ -27,29 +27,27 @@
 }
 
 - (void) _yieldToContext:(NSMutableArray *)context {
-    NSAutoreleasePool *pool([[NSAutoreleasePool alloc] init]);
-
-    SEL selector(reinterpret_cast<SEL>([[context objectAtIndex:0] pointerValue]));
-    id object([[context objectAtIndex:1] nonretainedObjectValue]);
-    volatile bool &stopped(*reinterpret_cast<bool *>([[context objectAtIndex:2] pointerValue]));
-
-    /* XXX: deal with exceptions */
-    id value = [self performSelector:selector withObject:object];
-
-    NSMethodSignature *signature([self methodSignatureForSelector:selector]);
-    [context removeAllObjects];
-    if ([signature methodReturnLength] != 0 && value != nil)
-        [context addObject:value];
-
-    stopped = true;
-
-    [self
-        performSelectorOnMainThread:@selector(doNothing)
-        withObject:nil
-        waitUntilDone:NO
-    ];
-
-    [pool release];
+    @autoreleasepool {
+        SEL selector(reinterpret_cast<SEL>([[context objectAtIndex:0] pointerValue]));
+        id object([[context objectAtIndex:1] nonretainedObjectValue]);
+        volatile bool &stopped(*reinterpret_cast<bool *>([[context objectAtIndex:2] pointerValue]));
+        
+        /* XXX: deal with exceptions */
+        id value = [self performSelector:selector withObject:object];
+        
+        NSMethodSignature *signature([self methodSignatureForSelector:selector]);
+        [context removeAllObjects];
+        if ([signature methodReturnLength] != 0 && value != nil)
+            [context addObject:value];
+        
+        stopped = true;
+        
+        [self
+         performSelectorOnMainThread:@selector(doNothing)
+         withObject:nil
+         waitUntilDone:NO
+         ];
+    }
 }
 
 - (id) yieldToSelector:(SEL)selector withObject:(id)object {

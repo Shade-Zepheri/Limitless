@@ -41,7 +41,7 @@
     
     @synchronized (self) {
         [self setFilter:[](Package *package) {
-            return ![package uninstalled] && package.isFavorited;
+            return [package isFavorited];
         }];
         
         [self setSorter:nullptr];

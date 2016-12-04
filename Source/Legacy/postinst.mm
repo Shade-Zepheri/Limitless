@@ -174,63 +174,60 @@ static bool FixApplications() {
 int main(int argc, const char *argv[]) {
     if (argc < 2 || strcmp(argv[1], "configure") != 0)
         return 0;
-
-    NSAutoreleasePool *pool([[NSAutoreleasePool alloc] init]);
-
-    bool restart(false);
-
-    if (kCFCoreFoundationVersionNumber >= 1000) {
-        if (!FixProtections())
-            return 1;
-        if (MoveStash())
-            restart = true;
-        else {
-            fprintf(stderr, "failed to move stash\n");
-            return 1;
+    @autoreleasepool {
+        bool restart(false);
+        
+        if (kCFCoreFoundationVersionNumber >= 1000) {
+            if (!FixProtections())
+                return 1;
+            if (MoveStash())
+                restart = true;
+            else {
+                fprintf(stderr, "failed to move stash\n");
+                return 1;
+            }
         }
+        
+#define OldCache_ "/var/root/Library/Caches/com.saurik.Cydia"
+        if (access(OldCache_, F_OK) == 0)
+            system("rm -rf " OldCache_);
+        
+#define NewCache_ "/var/mobile/Library/Caches/com.saurik.Cydia"
+        system("cd /; su -c 'mkdir -p " NewCache_ "' mobile");
+        if (access(NewCache_ "/lists", F_OK) != 0 && errno == ENOENT)
+            system("cp -at " NewCache_ " /var/lib/apt/lists");
+        system("chown -R 501.501 " NewCache_);
+        
+#define OldLibrary_ "/var/lib/cydia"
+        
+#define NewLibrary_ "/var/mobile/Library/Cydia"
+        system("cd /; su -c 'mkdir -p " NewLibrary_ "' mobile");
+        
+#define Cytore_ "/metadata.cb0"
+        
+#define CYDIA_LIST "/etc/apt/sources.list.d/cydia.list"
+        unlink(CYDIA_LIST);
+        [[NSString stringWithFormat:@
+          "deb http://apt.saurik.com/ ios/%.2f main\n"
+          "deb http://apt.thebigboss.org/repofiles/cydia/ stable main\n"
+          "deb http://cydia.zodttd.com/repo/cydia/ stable main\n"
+          "deb http://apt.modmyi.com/ stable main\n"
+          , kCFCoreFoundationVersionNumber] writeToFile:@ CYDIA_LIST atomically:YES];
+        
+        if (access(NewLibrary_ Cytore_, F_OK) != 0 && errno == ENOENT) {
+            if (access(NewCache_ Cytore_, F_OK) == 0)
+                system("mv -f " NewCache_ Cytore_ " " NewLibrary_);
+            else if (access(OldLibrary_ Cytore_, F_OK) == 0)
+                system("mv -f " OldLibrary_ Cytore_ " " NewLibrary_);
+            chown(NewLibrary_ Cytore_, 501, 501);
+        }
+        
+        FixPermissions();
+        
+        restart |= FixApplications();
+        
+        if (restart)
+            Finish("restart");
     }
-
-    #define OldCache_ "/var/root/Library/Caches/com.saurik.Cydia"
-    if (access(OldCache_, F_OK) == 0)
-        system("rm -rf " OldCache_);
-
-    #define NewCache_ "/var/mobile/Library/Caches/com.saurik.Cydia"
-    system("cd /; su -c 'mkdir -p " NewCache_ "' mobile");
-    if (access(NewCache_ "/lists", F_OK) != 0 && errno == ENOENT)
-        system("cp -at " NewCache_ " /var/lib/apt/lists");
-    system("chown -R 501.501 " NewCache_);
-
-    #define OldLibrary_ "/var/lib/cydia"
-
-    #define NewLibrary_ "/var/mobile/Library/Cydia"
-    system("cd /; su -c 'mkdir -p " NewLibrary_ "' mobile");
-
-    #define Cytore_ "/metadata.cb0"
-
-    #define CYDIA_LIST "/etc/apt/sources.list.d/cydia.list"
-    unlink(CYDIA_LIST);
-    [[NSString stringWithFormat:@
-        "deb http://apt.saurik.com/ ios/%.2f main\n"
-        "deb http://apt.thebigboss.org/repofiles/cydia/ stable main\n"
-        "deb http://cydia.zodttd.com/repo/cydia/ stable main\n"
-        "deb http://apt.modmyi.com/ stable main\n"
-    , kCFCoreFoundationVersionNumber] writeToFile:@ CYDIA_LIST atomically:YES];
-
-    if (access(NewLibrary_ Cytore_, F_OK) != 0 && errno == ENOENT) {
-        if (access(NewCache_ Cytore_, F_OK) == 0)
-            system("mv -f " NewCache_ Cytore_ " " NewLibrary_);
-        else if (access(OldLibrary_ Cytore_, F_OK) == 0)
-            system("mv -f " OldLibrary_ Cytore_ " " NewLibrary_);
-        chown(NewLibrary_ Cytore_, 501, 501);
-    }
-
-    FixPermissions();
-
-    restart |= FixApplications();
-
-    if (restart)
-        Finish("restart");
-
-    [pool release];
     return 0;
 }

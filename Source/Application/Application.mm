@@ -656,35 +656,33 @@ errno == ENOTDIR \
 }
 
 - (void) _refreshIfPossible {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    
-    NSDate *update([[NSDictionary dictionaryWithContentsOfFile:[Paths cacheState]] objectForKey:@"LastUpdate"]);
-    
-    bool recently = false;
-    if (update != nil) {
-        NSTimeInterval interval([update timeIntervalSinceNow]);
-        if (interval > -(15*60))
-            recently = true;
-    }
-    
-    // Don't automatic refresh if:
-    //  - We already refreshed recently.
-    //  - We already auto-refreshed this launch.
-    //  - Auto-refresh is disabled.
-    //  - Cydia's server is not reachable
-    if (recently || loaded_ || ManualRefresh || !IsReachable("cydia.saurik.com")) {
-        // If we are cancelling, we need to make sure it knows it's already loaded.
-        loaded_ = true;
+    @autoreleasepool {
+        NSDate *update([[NSDictionary dictionaryWithContentsOfFile:[Paths cacheState]] objectForKey:@"LastUpdate"]);
         
-        [self performSelectorOnMainThread:@selector(_loaded) withObject:nil waitUntilDone:NO];
-    } else {
-        // We are going to load, so remember that.
-        loaded_ = true;
+        bool recently = false;
+        if (update != nil) {
+            NSTimeInterval interval([update timeIntervalSinceNow]);
+            if (interval > -(15*60))
+                recently = true;
+        }
         
-        [tabbar_ performSelectorOnMainThread:@selector(beginUpdate) withObject:nil waitUntilDone:NO];
+        // Don't automatic refresh if:
+        //  - We already refreshed recently.
+        //  - We already auto-refreshed this launch.
+        //  - Auto-refresh is disabled.
+        //  - Cydia's server is not reachable
+        if (recently || loaded_ || ManualRefresh || !IsReachable("cydia.saurik.com")) {
+            // If we are cancelling, we need to make sure it knows it's already loaded.
+            loaded_ = true;
+            
+            [self performSelectorOnMainThread:@selector(_loaded) withObject:nil waitUntilDone:NO];
+        } else {
+            // We are going to load, so remember that.
+            loaded_ = true;
+            
+            [tabbar_ performSelectorOnMainThread:@selector(beginUpdate) withObject:nil waitUntilDone:NO];
+        }
     }
-    
-    [pool release];
 }
 
 #pragma mark - Progress
@@ -1227,13 +1225,11 @@ errno == ENOTDIR \
 #pragma mark - Utilities
 
 - (void) system:(NSString *)command DEPRECATED_ATTRIBUTE {
-    NSAutoreleasePool *pool([[NSAutoreleasePool alloc] init]);
-    
-    _trace();
-    system([command UTF8String]);
-    _trace();
-    
-    [pool release];
+    @autoreleasepool {
+        _trace();
+        system([command UTF8String]);
+        _trace();
+    }
 }
 
 #pragma mark - SpringBoard

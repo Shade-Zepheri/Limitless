@@ -47,22 +47,20 @@
 }
 
 - (void) _setSource:(NSURL *) url {
-    NSAutoreleasePool *pool([[NSAutoreleasePool alloc] init]);
-    
-    if (NSData *data = [NSURLConnection
-                        sendSynchronousRequest:[NSURLRequest
-                                                requestWithURL:url
-                                                cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                timeoutInterval:10
-                                                ]
-                        
-                        returningResponse:NULL
-                        error:NULL
-                        ])
-        if (UIImage *image = [UIImage imageWithData:data])
-            [self performSelectorOnMainThread:@selector(_setImage:) withObject:[NSArray arrayWithObjects:url, image, nil] waitUntilDone:NO];
-    
-    [pool release];
+    @autoreleasepool {
+        if (NSData *data = [NSURLConnection
+                            sendSynchronousRequest:[NSURLRequest
+                                                    requestWithURL:url
+                                                    cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                    timeoutInterval:10
+                                                    ]
+                            
+                            returningResponse:NULL
+                            error:NULL
+                            ])
+            if (UIImage *image = [UIImage imageWithData:data])
+                [self performSelectorOnMainThread:@selector(_setImage:) withObject:[NSArray arrayWithObjects:url, image, nil] waitUntilDone:NO];
+    }
 }
 
 - (void) setSource:(Source *)source {

@@ -307,33 +307,30 @@ static NSDateFormatter* CreateDateFormatter(NSString *format)
     }
 }
 
-- (void)removeCachedResponseForCachedKeys:(NSArray *)cacheKeys
-{
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-
-    NSEnumerator *enumerator = [cacheKeys objectEnumerator];
-    NSString *cacheKey;
-
-    @synchronized(self.diskCacheInfo)
-    {
-        NSMutableDictionary *accesses = [self.diskCacheInfo objectForKey:kSDURLCacheInfoAccessesKey];
-        NSMutableDictionary *sizes = [self.diskCacheInfo objectForKey:kSDURLCacheInfoSizesKey];
-        NSFileManager *fileManager = [[NSFileManager alloc] init];
-
-        while ((cacheKey = [enumerator nextObject]))
+- (void)removeCachedResponseForCachedKeys:(NSArray *)cacheKeys {
+    @autoreleasepool {
+        NSEnumerator *enumerator = [cacheKeys objectEnumerator];
+        NSString *cacheKey;
+        
+        @synchronized(self.diskCacheInfo)
         {
-            NSUInteger cacheItemSize = [[sizes objectForKey:cacheKey] unsignedIntegerValue];
-            [accesses removeObjectForKey:cacheKey];
-            [sizes removeObjectForKey:cacheKey];
-            [fileManager removeItemAtPath:[diskCachePath stringByAppendingPathComponent:cacheKey] error:NULL];
-
-            diskCacheUsage -= cacheItemSize;
-            [self.diskCacheInfo setObject:[NSNumber numberWithUnsignedInteger:diskCacheUsage] forKey:kSDURLCacheInfoDiskUsageKey];
+            NSMutableDictionary *accesses = [self.diskCacheInfo objectForKey:kSDURLCacheInfoAccessesKey];
+            NSMutableDictionary *sizes = [self.diskCacheInfo objectForKey:kSDURLCacheInfoSizesKey];
+            NSFileManager *fileManager = [[NSFileManager alloc] init];
+            
+            while ((cacheKey = [enumerator nextObject]))
+            {
+                NSUInteger cacheItemSize = [[sizes objectForKey:cacheKey] unsignedIntegerValue];
+                [accesses removeObjectForKey:cacheKey];
+                [sizes removeObjectForKey:cacheKey];
+                [fileManager removeItemAtPath:[diskCachePath stringByAppendingPathComponent:cacheKey] error:NULL];
+                
+                diskCacheUsage -= cacheItemSize;
+                [self.diskCacheInfo setObject:[NSNumber numberWithUnsignedInteger:diskCacheUsage] forKey:kSDURLCacheInfoDiskUsageKey];
+            }
+            [fileManager release];
         }
-        [fileManager release];
     }
-
-    [pool drain];
 }
 
 - (void)balanceDiskUsage

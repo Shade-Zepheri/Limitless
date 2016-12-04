@@ -50,19 +50,17 @@
     static RegEx finish_r("finish:([^:]*)");
     
     while (fgets(line, sizeof(line), file)) {
-        NSAutoreleasePool *pool([[NSAutoreleasePool alloc] init]);
-        
-        size_t size = strlen(line);
-        lprintf("C:%s\n", line);
-        
-        if (finish_r(line, size)) {
-            NSString *finish = finish_r[1];
-            int index = [Finishes_ indexOfObject:finish];
-            if (index != INT_MAX && index > Finish_)
-                Finish_ = index;
+        @autoreleasepool {
+            size_t size = strlen(line);
+            lprintf("C:%s\n", line);
+            
+            if (finish_r(line, size)) {
+                NSString *finish = finish_r[1];
+                int index = [Finishes_ indexOfObject:finish];
+                if (index != INT_MAX && index > Finish_)
+                    Finish_ = index;
+            }
         }
-        
-        [pool release];
     }
     
     _assume(false);
@@ -76,48 +74,46 @@
     static RegEx pmstatus_r("([^:]*):([^:]*):([^:]*):(.*)");
     
     while (fgets(line, sizeof(line), file)) {
-        NSAutoreleasePool *pool([[NSAutoreleasePool alloc] init]);
-        
-        size_t size = strlen(line);
-        lprintf("S:%s\n", line);
-        
-        if (conffile_r(line, size)) {
-            // status: /line : conffile-prompt : '/fail' '/fail.dpkg-new' 1 1
-            [delegate_ performSelectorOnMainThread:@selector(setConfigurationData:) withObject:conffile_r[1] waitUntilDone:YES];
-        } else if (strncmp(line, "status: ", 8) == 0) {
-            // status: <package>: {unpacked,half-configured,installed}
-            CydiaProgressEvent *event([CydiaProgressEvent eventWithMessage:[NSString stringWithUTF8String:(line + 8)] ofType:kCydiaProgressEventTypeStatus]);
-            [progress_ performSelectorOnMainThread:@selector(addProgressEvent:) withObject:event waitUntilDone:YES];
-        } else if (strncmp(line, "processing: ", 12) == 0) {
-            // processing: configure: config-test
-            CydiaProgressEvent *event([CydiaProgressEvent eventWithMessage:[NSString stringWithUTF8String:(line + 12)] ofType:kCydiaProgressEventTypeStatus]);
-            [progress_ performSelectorOnMainThread:@selector(addProgressEvent:) withObject:event waitUntilDone:YES];
-        } else if (pmstatus_r(line, size)) {
-            std::string type([pmstatus_r[1] UTF8String]);
+        @autoreleasepool {
+            size_t size = strlen(line);
+            lprintf("S:%s\n", line);
             
-            NSString *package = pmstatus_r[2];
-            if ([package isEqualToString:@"dpkg-exec"])
-                package = nil;
-            
-            float percent([pmstatus_r[3] floatValue]);
-            [progress_ performSelectorOnMainThread:@selector(setProgressPercent:) withObject:[NSNumber numberWithFloat:(percent / 100)] waitUntilDone:YES];
-            
-            NSString *string = pmstatus_r[4];
-            
-            if (type == "pmerror") {
-                CydiaProgressEvent *event([CydiaProgressEvent eventWithMessage:string ofType:kCydiaProgressEventTypeError forPackage:package]);
+            if (conffile_r(line, size)) {
+                // status: /line : conffile-prompt : '/fail' '/fail.dpkg-new' 1 1
+                [delegate_ performSelectorOnMainThread:@selector(setConfigurationData:) withObject:conffile_r[1] waitUntilDone:YES];
+            } else if (strncmp(line, "status: ", 8) == 0) {
+                // status: <package>: {unpacked,half-configured,installed}
+                CydiaProgressEvent *event([CydiaProgressEvent eventWithMessage:[NSString stringWithUTF8String:(line + 8)] ofType:kCydiaProgressEventTypeStatus]);
                 [progress_ performSelectorOnMainThread:@selector(addProgressEvent:) withObject:event waitUntilDone:YES];
-            } else if (type == "pmstatus") {
-                CydiaProgressEvent *event([CydiaProgressEvent eventWithMessage:string ofType:kCydiaProgressEventTypeStatus forPackage:package]);
+            } else if (strncmp(line, "processing: ", 12) == 0) {
+                // processing: configure: config-test
+                CydiaProgressEvent *event([CydiaProgressEvent eventWithMessage:[NSString stringWithUTF8String:(line + 12)] ofType:kCydiaProgressEventTypeStatus]);
                 [progress_ performSelectorOnMainThread:@selector(addProgressEvent:) withObject:event waitUntilDone:YES];
-            } else if (type == "pmconffile")
-                [delegate_ performSelectorOnMainThread:@selector(setConfigurationData:) withObject:string waitUntilDone:YES];
-            else
-                lprintf("E:unknown pmstatus\n");
-        } else
-            lprintf("E:unknown status\n");
-        
-        [pool release];
+            } else if (pmstatus_r(line, size)) {
+                std::string type([pmstatus_r[1] UTF8String]);
+                
+                NSString *package = pmstatus_r[2];
+                if ([package isEqualToString:@"dpkg-exec"])
+                    package = nil;
+                
+                float percent([pmstatus_r[3] floatValue]);
+                [progress_ performSelectorOnMainThread:@selector(setProgressPercent:) withObject:[NSNumber numberWithFloat:(percent / 100)] waitUntilDone:YES];
+                
+                NSString *string = pmstatus_r[4];
+                
+                if (type == "pmerror") {
+                    CydiaProgressEvent *event([CydiaProgressEvent eventWithMessage:string ofType:kCydiaProgressEventTypeError forPackage:package]);
+                    [progress_ performSelectorOnMainThread:@selector(addProgressEvent:) withObject:event waitUntilDone:YES];
+                } else if (type == "pmstatus") {
+                    CydiaProgressEvent *event([CydiaProgressEvent eventWithMessage:string ofType:kCydiaProgressEventTypeStatus forPackage:package]);
+                    [progress_ performSelectorOnMainThread:@selector(addProgressEvent:) withObject:event waitUntilDone:YES];
+                } else if (type == "pmconffile")
+                    [delegate_ performSelectorOnMainThread:@selector(setConfigurationData:) withObject:string waitUntilDone:YES];
+                else
+                    lprintf("E:unknown pmstatus\n");
+            } else
+                lprintf("E:unknown status\n");
+        }
     }
     
     _assume(false);
@@ -128,14 +124,12 @@
     char line[1024];
     
     while (fgets(line, sizeof(line), file)) {
-        NSAutoreleasePool *pool([[NSAutoreleasePool alloc] init]);
-        
-        lprintf("O:%s\n", line);
-        
-        CydiaProgressEvent *event([CydiaProgressEvent eventWithMessage:[NSString stringWithUTF8String:line] ofType:kCydiaProgressEventTypeInformation]);
-        [progress_ performSelectorOnMainThread:@selector(addProgressEvent:) withObject:event waitUntilDone:YES];
-        
-        [pool release];
+        @autoreleasepool {
+            lprintf("O:%s\n", line);
+            
+            CydiaProgressEvent *event([CydiaProgressEvent eventWithMessage:[NSString stringWithUTF8String:line] ofType:kCydiaProgressEventTypeInformation]);
+            [progress_ performSelectorOnMainThread:@selector(addProgressEvent:) withObject:event waitUntilDone:YES];
+        }
     }
     
     _assume(false);

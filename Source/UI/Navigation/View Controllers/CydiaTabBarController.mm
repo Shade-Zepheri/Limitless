@@ -63,18 +63,16 @@
 }
 
 - (void) performUpdate {
-    NSAutoreleasePool *pool([[NSAutoreleasePool alloc] init]);
-    
-    SourceStatus status(self, database_);
-    [database_ updateWithStatus:status];
-    
-    [self
-     performSelectorOnMainThread:@selector(completeUpdate)
-     withObject:nil
-     waitUntilDone:NO
-     ];
-    
-    [pool release];
+    @autoreleasepool {
+        SourceStatus status(self, database_);
+        [database_ updateWithStatus:status];
+        
+        [self
+         performSelectorOnMainThread:@selector(completeUpdate)
+         withObject:nil
+         waitUntilDone:NO
+         ];
+    }
 }
 
 - (void) stopUpdateWithSelector:(SEL)selector {
