@@ -40,7 +40,7 @@
     sectioned_ = YES;
     
     @synchronized (self) {
-        [self setFilter:[=](Package *package) {
+        [self setFilter:[](Package *package) {
             return ![package uninstalled] && package.isFavorited;
         }];
         

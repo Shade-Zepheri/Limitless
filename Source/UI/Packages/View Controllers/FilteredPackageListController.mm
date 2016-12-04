@@ -9,17 +9,19 @@
 
 @implementation FilteredPackageListController
 
-- (void) setFilter:(PackageFilter)filter {
+- (void)setFilter:(PackageFilter)filter {
     @synchronized (self) {
         filter_ = filter;
-    } }
+    }
+}
 
-- (void) setSorter:(PackageSorter)sorter {
+- (void)setSorter:(PackageSorter)sorter {
     @synchronized (self) {
         sorter_ = sorter;
-    } }
-
-- (NSMutableArray *) _reloadPackages {
+    }
+}
+    
+- (NSMutableArray *)_reloadPackages {
     @synchronized (database_) {
         era_ = [database_ era];
         
@@ -35,17 +37,21 @@
         }
         
         _profile(PackageTable$reloadData$Filter)
-        for (Package *package in packages)
-            if (filter(package))
+        for (Package *package in packages) {
+            if (filter(package)) {
                 [filtered addObject:package];
+            }
+        }
         _end
         
-        if (sorter)
-            sorter(filtered);
+        if (sorter) {
+           sorter(filtered);
+        }
         return filtered;
-    } }
+    }
+}
 
-- (id) initWithDatabase:(Database *)database title:(NSString *)title filter:(PackageFilter)filter {
+- (id)initWithDatabase:(Database *)database title:(NSString *)title filter:(PackageFilter)filter {
     if ((self = [super initWithDatabase:database title:title]) != nil) {
         [self setFilter:filter];
     } return self;
