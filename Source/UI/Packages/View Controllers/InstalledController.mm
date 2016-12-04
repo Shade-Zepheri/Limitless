@@ -23,7 +23,7 @@
 }
 
 - (void) useRecent {
-    sectioned_ = false;
+    sectioned_ = NO;
     
     @synchronized (self) {
         [self setFilter:[](Package *package) {
@@ -36,28 +36,28 @@
     }
 }
 
-static BOOL _isFiltered = NO;
-
-+ (BOOL)isFiltered {
-    return _isFiltered;
-}
-
-- (void)setIsFiltered:(BOOL)isFiltered {
-    _isFiltered = isFiltered;
+- (void)useFavorites {
+    sectioned_ = YES;
+    
+    @synchronized (self) {
+        [self setFilter:[=](Package *package) {
+            return ![package uninstalled] && package.isFavorited;
+        }];
+        
+        [self setSorter:nullptr];
+    }
 }
 
 - (void) useFilter:(UISegmentedControl *)segmented {
     NSInteger selected([segmented selectedSegmentIndex]);
-    // FIXME: Favorites broken. Switching off for Beta 5
-//    if (selected == 3) {
-//        [self setIsFiltered:YES];
-//    } else {
-//        [self setIsFiltered:NO];
-//    }
-    if (selected == 2)
-        return [self useRecent];
+    if (selected == 3) {
+        return [self useFavorites];
+    }
+    if (selected == 2) {
+       return [self useRecent];
+    }
     bool simple(selected == 0);
-    sectioned_ = true;
+    sectioned_ = YES;
     
     @synchronized (self) {
         [self setFilter:[=](Package *package) {
@@ -115,8 +115,7 @@ static BOOL _isFiltered = NO;
                                                                                    UCLocalize("USER"),
                                                                                    UCLocalize("EXPERT"),
                                                                                    UCLocalize("RECENT"),
-                                                                                   // FIXME: Favorites broken. Switching off for Beta 5
-                                                                                   //UCLocalize("FAVORITES")
+                                                                                   UCLocalize("FAVORITES")
                                                                                     ]] autorelease]);
         [segmented setSelectedSegmentIndex:0];
         [[self navigationItem] setTitleView:segmented];

@@ -835,7 +835,20 @@ float CYScrollViewDecelerationRateNormal;
 }
 
 - (UIBarButtonItem *) leftButton {
-    return reloaditem_;
+    UINavigationItem *item([self navigationItem]);
+    if ([item backBarButtonItem] != nil && ![item hidesBackButton])
+        return nil;
+    
+    if (UINavigationController *navigation = [self navigationController])
+        if ([[navigation parentOrPresentingViewController] presentedViewController] == navigation)
+            return [[[UIBarButtonItem alloc]
+                     initWithTitle:UCLocalize("CLOSE")
+                     style:UIBarButtonItemStylePlain
+                     target:self
+                     action:@selector(close)
+                     ] autorelease];
+    
+    return nil;
 }
 
 - (void) applyLeftButton {
@@ -843,20 +856,7 @@ float CYScrollViewDecelerationRateNormal;
 }
 
 - (UIBarButtonItem *) rightButton {
-    UINavigationItem *item([self navigationItem]);
-    if ([item backBarButtonItem] != nil && ![item hidesBackButton])
-    return nil;
-    
-    if (UINavigationController *navigation = [self navigationController])
-    if ([[navigation parentOrPresentingViewController] presentedViewController] == navigation)
-    return [[[UIBarButtonItem alloc]
-             initWithTitle:UCLocalize("CLOSE")
-             style:UIBarButtonItemStylePlain
-             target:self
-             action:@selector(close)
-             ] autorelease];
-    
-    return nil;
+    return reloaditem_;
 }
 
 - (void) applyLoadingTitle {

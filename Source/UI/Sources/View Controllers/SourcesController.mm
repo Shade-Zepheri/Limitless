@@ -135,7 +135,7 @@
             [UIApplication sharedApplication].shortcutItems = newShortcuts;
             
         }]);
-        UIAlertAction *cancelAction([UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDestructive handler:nil]);
+        UIAlertAction *cancelAction([UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]);
         
         [favoriteSheet addAction:firstPlaceAction];
         [favoriteSheet addAction:secondPlaceAction];

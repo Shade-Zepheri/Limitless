@@ -11,7 +11,6 @@
 #import "Section.h"
 #import "CYPackageController.h"
 #import "PackageCell.h"
-#import "InstalledController.h"
 
 @implementation PackageListController
 
@@ -152,11 +151,8 @@
         Section *section([sections_ objectAtIndex:[path section]]);
         NSInteger row([path row]);
         Package *package;
-        if (InstalledController.isFiltered) {
-            package = [[database_ currentFavorites] objectAtIndex:([section row] + row)];
-        } else {
-            package = [packages_ objectAtIndex:([section row] + row)];
-        }
+        package = [packages_ objectAtIndex:([section row] + row)];
+        
         return [[package retain] autorelease];
     }
 }
@@ -192,7 +188,6 @@
 - (NSArray *)tableView:(UITableView *)tableView
 editActionsForRowAtIndexPath:(NSIndexPath *)path {
     // FIXME: Favorites broken. Switching off for Beta 5
-    return @[];
     
     Package *package([self packageAtIndexPath:path]);
     package = [database_ packageWithName:[package id]];
@@ -203,9 +198,9 @@ editActionsForRowAtIndexPath:(NSIndexPath *)path {
     favoritesButton.backgroundColor = [UIColor systemDarkGreenColor];
     UITableViewRowAction *addToFavoritesAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
         
-        [tableView setEditing:NO animated:YES];
         [database_ addPackageToFavoritesList:package];
         [list_ reloadData];
+        NSLog(@"%@", [database_ currentFavorites]);
         
     }];
     [addToFavoritesAction _setButton:favoritesButton];
