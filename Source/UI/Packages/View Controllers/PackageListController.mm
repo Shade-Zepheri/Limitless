@@ -197,9 +197,10 @@
     favoritesButton.backgroundColor = [UIColor systemDarkGreenColor];
     UITableViewRowAction *addToFavoritesAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
         
+        [tableView setEditing:NO animated:YES];
         [database_ addPackageToFavoritesList:package];
-        [self reloadData];
-        
+        [list_ reloadData];
+    
     }];
     [addToFavoritesAction _setButton:favoritesButton];
     addToFavoritesAction.backgroundColor = [UIColor systemDarkGreenColor];

@@ -30,7 +30,7 @@
     return name_;
 }
 
-- (void) setPackage:(Package *)package asSummary:(bool)summary {
+- (void)setPackage:(Package *)package asSummary:(bool)summary {
     summarized_ = summary;
     
     icon_ = nil;
@@ -115,7 +115,7 @@
     [content_ setNeedsDisplay];
 }
 
-- (void) drawSummaryContentRect:(CGRect)rect {
+- (void)drawSummaryContentRect:(CGRect)rect {
     bool highlighted(highlighted_);
     float width([self bounds].size.width);
     
@@ -164,7 +164,7 @@
         [placard_ drawAtPoint:CGPointMake(width - 52, 11)];
 }
 
-- (void) drawNormalContentRect:(CGRect)rect {
+- (void)drawNormalContentRect:(CGRect)rect {
     bool highlighted(highlighted_);
     float width([self bounds].size.width);
     
@@ -221,7 +221,7 @@
     }
 }
 
-- (void) drawContentRect:(CGRect)rect {
+- (void)drawContentRect:(CGRect)rect {
     if (summarized_) {
         [self drawSummaryContentRect:rect];
     } else {
