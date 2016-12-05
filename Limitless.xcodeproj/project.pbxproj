@@ -2492,7 +2492,11 @@
 				TargetAttributes = {
 					FA28E7091D1B21A5003D3724 = {
 						CreatedOnToolsVersion = 7.3.1;
+<<<<<<< HEAD
 						DevelopmentTeam = E6QK4MU6LM;
+=======
+						DevelopmentTeam = 36G86N4FPV;
+>>>>>>> 941cdb8... Commits for Tonight
 						ProvisioningStyle = Automatic;
 					};
 					FA3A18321DEAB1F3000557AC = {
@@ -3366,7 +3370,7 @@
 				"CLANG_ENABLE_MODULES[sdk=iphonesimulator*]" = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 36G86N4FPV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/External/System/Library/PrivateFrameworks",
@@ -3376,7 +3380,12 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = Resources/Info.plist;
 				LD_NO_PIE = YES;
+<<<<<<< HEAD
 				PRODUCT_BUNDLE_IDENTIFIER = oss.Limitless;
+=======
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/SharedFrameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.shade.Limitless;
+>>>>>>> 941cdb8... Commits for Tonight
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -3392,7 +3401,7 @@
 				"CLANG_ENABLE_MODULES[sdk=iphonesimulator*]" = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 36G86N4FPV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/External/System/Library/PrivateFrameworks",
@@ -3402,7 +3411,12 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = Resources/Info.plist;
 				LD_NO_PIE = YES;
+<<<<<<< HEAD
 				PRODUCT_BUNDLE_IDENTIFIER = oss.Limitless;
+=======
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/SharedFrameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.shade.Limitless;
+>>>>>>> 941cdb8... Commits for Tonight
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

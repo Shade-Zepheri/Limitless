@@ -207,7 +207,11 @@ editActionsForRowAtIndexPath:(NSIndexPath *)path {
         [tableView setEditing:NO animated:YES];
         [database_ addPackageToFavoritesList:package];
         [list_ reloadData];
+<<<<<<< HEAD
         
+=======
+    
+>>>>>>> 941cdb8... Commits for Tonight
     }];
     [addToFavoritesAction _setButton:favoritesButton];
     addToFavoritesAction.backgroundColor = [UIColor systemDarkGreenColor];
