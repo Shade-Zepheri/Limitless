@@ -29,6 +29,7 @@
 #import "LoadingViewController.h"
 #import "SourcesController.h"
 #import "HomeController.h"
+#import "SettingsViewController.h"
 #import "SectionsController.h"
 #import "ChangesController.h"
 #import "InstalledController.h"
@@ -843,7 +844,13 @@ errno == ENOTDIR \
         if (!external && [base isEqualToString:@"search"]) {
             controller = [[[SearchController alloc] initWithDatabase:database_ query:argument] autorelease];
         }
-        
+        /*
+        if ([base isEqualToString:@"home"]) {
+            if ([argument isEqualToString:@"settings"]) {
+                controller = [[[SettingsViewController alloc] init] autorelease];
+            }
+        }
+        */
         if (!external && [base isEqualToString:@"sections"]) {
             if ([argument isEqualToString:@"all"] || [argument isEqualToString:@"*"])
                 argument = nil;

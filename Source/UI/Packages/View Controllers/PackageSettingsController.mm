@@ -6,7 +6,7 @@
 //
 
 #import "PackageSettingsController.h"
-#import "Database.h"
+
 #import "Package.h"
 #import "DisplayHelpers.hpp"
 
@@ -20,16 +20,19 @@
     if (package_ == nil)
         return 0;
     
-    if ([package_ installed] == nil)
+    if ([package_ installed] == nil) {
         return 1;
-    else
+    } else {
         return 2;
+    }
+    
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (package_ == nil)
+    if (package_ == nil) {
         return 0;
-    
+    }
+
     // both sections contain just one item right now.
     return 1;
 }
@@ -39,10 +42,11 @@
 }
 
 - (NSString *) tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-    if (section == 0)
+    if (section == 0) {
         return UCLocalize("SHOW_ALL_CHANGES_EX");
-    else
+    } else {
         return UCLocalize("IGNORE_UPGRADES_EX");
+    }
 }
 
 - (void) onSubscribed:(id)control {
@@ -77,8 +81,9 @@
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (package_ == nil)
+    if (package_ == nil) {
         return nil;
+    }
     
     switch ([indexPath section]) {
         case 0: return subscribedCell_;

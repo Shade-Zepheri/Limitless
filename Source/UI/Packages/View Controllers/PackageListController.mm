@@ -11,7 +11,6 @@
 #import "Section.h"
 #import "CYPackageController.h"
 #import "PackageCell.h"
-#import "InstalledController.h"
 
 @implementation PackageListController
 

@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SettingsViewController : UITableViewController
+@interface SettingsViewController : UIViewController
+<UITableViewDataSource, UITableViewDelegate>
+@property (nonatomic, retain) UITableView *table;
+@property (nonatomic, retain) UISwitch *nightModeSwitch;
+@property (nonatomic, retain) UITableViewCell *nightModeCell;
 
 @end

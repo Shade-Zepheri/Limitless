@@ -8,6 +8,7 @@
 #import "HomeController.h"
 #import "UIGlobals.h"
 #import "DisplayHelpers.hpp"
+#import "SettingsViewController.h"
 
 @implementation HomeController
 
@@ -62,7 +63,8 @@ static void HomeControllerReachabilityCallback(SCNetworkReachabilityRef reachabi
 }
 
 - (void)settingsButtonClicked {
-    
+    SettingsViewController *controller = [[[SettingsViewController alloc] init] autorelease];
+    [[self navigationController] pushViewController:controller animated:YES];
 }
 
 
@@ -72,7 +74,7 @@ static void HomeControllerReachabilityCallback(SCNetworkReachabilityRef reachabi
              initWithTitle:UCLocalize("SETTINGS")
              style:UIBarButtonItemStylePlain
              target:self
-             action:@selector(aboutButtonClicked)
+             action:@selector(settingsButtonClicked)
              ] autorelease];
 }
 

@@ -252,7 +252,7 @@
         hud_ = nil;
         
         if (cydia_) {
-            if (warning != nil) {
+            if (warning) {
                 UIAlertView *alert = [[[UIAlertView alloc]
                                        initWithTitle:UCLocalize("SOURCE_WARNING")
                                        message:warning
@@ -273,7 +273,7 @@
             }
             
             [self complete];
-        } else if (error_ != nil) {
+        } else if (error_) {
             UIAlertView *alert = [[[UIAlertView alloc]
                                    initWithTitle:UCLocalize("VERIFICATION_ERROR")
                                    message:[error_ localizedDescription]
