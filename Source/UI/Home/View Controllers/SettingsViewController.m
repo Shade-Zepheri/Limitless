@@ -14,6 +14,8 @@
     return [NSURL URLWithString:@"cydia://home/settings"];
 }
 
+// CRASHES RN AS NOT ALL CELLS HAVE BEEN ADDED
+
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
     return 3;
 }
