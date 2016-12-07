@@ -8,7 +8,6 @@
 #import "HomeController.h"
 #import "UIGlobals.h"
 #import "DisplayHelpers.hpp"
-#import "SettingsController.h"
 
 @implementation HomeController
 
@@ -63,8 +62,9 @@ static void HomeControllerReachabilityCallback(SCNetworkReachabilityRef reachabi
 }
 
 - (void)settingsButtonClicked {
-    [SettingsController showSettings];
+    
 }
+
 
 - (UIBarButtonItem *) leftButton {
     //Eventually have it open settings
@@ -72,7 +72,7 @@ static void HomeControllerReachabilityCallback(SCNetworkReachabilityRef reachabi
              initWithTitle:UCLocalize("SETTINGS")
              style:UIBarButtonItemStylePlain
              target:self
-             action:@selector(settingsButtonClicked)
+             action:@selector(aboutButtonClicked)
              ] autorelease];
 }
 

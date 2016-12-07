@@ -14,6 +14,11 @@
 
 @implementation InstalledController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self reloadData];
+}
+
 - (NSURL *) referrerURL {
     return [NSURL URLWithString:[NSString stringWithFormat:@"%@/#!/installed/", UI_]];
 }

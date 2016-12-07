@@ -11,6 +11,7 @@
 #import "Section.h"
 #import "CYPackageController.h"
 #import "PackageCell.h"
+#import "InstalledController.h"
 
 @implementation PackageListController
 
@@ -199,7 +200,7 @@
         
         [tableView setEditing:NO animated:YES];
         [database_ addPackageToFavoritesList:package];
-        [list_ reloadData];
+        [self reloadData];
     
     }];
     [addToFavoritesAction _setButton:favoritesButton];
