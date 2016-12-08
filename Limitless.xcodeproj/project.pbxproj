@@ -21,7 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		33109EAD1DF64BA300066548 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33109EAC1DF64BA200066548 /* SettingsViewController.m */; };
+		33109EAD1DF64BA300066548 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33109EAC1DF64BA200066548 /* SettingsViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BC2569201DF00B4D000EA2C3 /* UIColor+CydiaColors.m in Sources */ = {isa = PBXBuildFile; fileRef = BC25691F1DF00B4D000EA2C3 /* UIColor+CydiaColors.m */; };
 		FA01D21C1D1B22B100B49E70 /* DiskUsage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA01D20F1D1B22B100B49E70 /* DiskUsage.cpp */; };
 		FA01D21D1D1B22B100B49E70 /* lookup3.c in Sources */ = {isa = PBXBuildFile; fileRef = FA01D2111D1B22B100B49E70 /* lookup3.c */; };

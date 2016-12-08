@@ -62,9 +62,17 @@ static void HomeControllerReachabilityCallback(SCNetworkReachabilityRef reachabi
     [alert show];
 }
 
+- (void)done {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (void)settingsButtonClicked {
     SettingsViewController *controller = [[[SettingsViewController alloc] init] autorelease];
-    [[self navigationController] pushViewController:controller animated:YES];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
+    controller.navigationItem.rightBarButtonItem = doneButton;
+    [navigationController.navigationItem setTitle:@"Settings"];
+    [self presentViewController:navigationController animated:YES completion:nil];
 }
 
 
