@@ -86,7 +86,7 @@
     
     _nightModeCell = [[UITableViewCell alloc] init];
     [[_nightModeCell textLabel] setText:@"Dark Mode"];
-    [_nightModeCell setAccessoryView:_nightModeSwitch];
+    _nightModeCell.accessoryView = _nightModeSwitch;
     [_nightModeCell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     
@@ -134,13 +134,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[self navigationItem] setTitle:@"Settings"];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    _nightModeCell = nil;
-    _table = nil;
-    _nightModeSwitch = nil;
-    [super viewWillDisappear:animated];
 }
 
 - (void)setNightMode:(id)control {
