@@ -22,6 +22,7 @@
 
 /* Begin PBXBuildFile section */
 		33109EAD1DF64BA300066548 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33109EAC1DF64BA200066548 /* SettingsViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		33922C561DFD132B00E9B088 /* DefaultPageOptionsList.m in Sources */ = {isa = PBXBuildFile; fileRef = 33922C551DFD132B00E9B088 /* DefaultPageOptionsList.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BC2569201DF00B4D000EA2C3 /* UIColor+CydiaColors.m in Sources */ = {isa = PBXBuildFile; fileRef = BC25691F1DF00B4D000EA2C3 /* UIColor+CydiaColors.m */; };
 		FA01D21C1D1B22B100B49E70 /* DiskUsage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA01D20F1D1B22B100B49E70 /* DiskUsage.cpp */; };
 		FA01D21D1D1B22B100B49E70 /* lookup3.c in Sources */ = {isa = PBXBuildFile; fileRef = FA01D2111D1B22B100B49E70 /* lookup3.c */; };
@@ -573,6 +574,8 @@
 /* Begin PBXFileReference section */
 		33109EA91DF64A8C00066548 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		33109EAC1DF64BA200066548 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		33922C541DFD130000E9B088 /* DefaultPageOptionsList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultPageOptionsList.h; sourceTree = "<group>"; };
+		33922C551DFD132B00E9B088 /* DefaultPageOptionsList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultPageOptionsList.m; sourceTree = "<group>"; };
 		BC25691E1DF00B4D000EA2C3 /* UIColor+CydiaColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+CydiaColors.h"; sourceTree = "<group>"; };
 		BC25691F1DF00B4D000EA2C3 /* UIColor+CydiaColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CydiaColors.m"; sourceTree = "<group>"; };
 		FA01D20C1D1B22B100B49E70 /* cfversion.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = cfversion.mm; sourceTree = "<group>"; };
@@ -1985,6 +1988,8 @@
 				FA6C86CA1D760B6600FB99CF /* HomeController.mm */,
 				33109EA91DF64A8C00066548 /* SettingsViewController.h */,
 				33109EAC1DF64BA200066548 /* SettingsViewController.m */,
+				33922C541DFD130000E9B088 /* DefaultPageOptionsList.h */,
+				33922C551DFD132B00E9B088 /* DefaultPageOptionsList.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -2781,6 +2786,7 @@
 				FA6C86DE1D761F3600FB99CF /* SectionsController.mm in Sources */,
 				FA6C863F1D74AC6E00FB99CF /* DisplayHelpers.mm in Sources */,
 				FA6C86EA1D7621CC00FB99CF /* InstalledController.mm in Sources */,
+				33922C561DFD132B00E9B088 /* DefaultPageOptionsList.m in Sources */,
 				FA6C86E71D76216300FB99CF /* PackageSettingsController.mm in Sources */,
 				FA6C86E11D76200200FB99CF /* ChangesController.mm in Sources */,
 				FA6C86471D74B04F00FB99CF /* CFArray+Sort.mm in Sources */,

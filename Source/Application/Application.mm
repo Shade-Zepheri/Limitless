@@ -30,6 +30,7 @@
 #import "SourcesController.h"
 #import "HomeController.h"
 #import "SettingsViewController.h"
+#import "DefaultPageOptionsList.h"
 #import "SectionsController.h"
 #import "ChangesController.h"
 #import "InstalledController.h"
@@ -845,7 +846,13 @@ errno == ENOTDIR \
         */
     } else if ([components count] == 2) {
         NSString *argument = [[components objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        
+        /*  And I put on my robe and wizard hat and CyteKit dissapears
+        if ([base isEqualToString:@"settings"]) {
+            if ([argument isEqualToString:@"defaultpage"]) {
+                controller = [[DefaultPageOptionsList alloc] init];
+            }
+        }
+        */
         if ([base isEqualToString:@"package"]) {
             controller = [self pageForPackage:argument withReferrer:referrer];
         }
