@@ -21,7 +21,15 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		33109EAD1DF64BA300066548 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33109EAC1DF64BA200066548 /* SettingsViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		33109EAD1DF64BA300066548 /* LMXSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33109EAC1DF64BA200066548 /* LMXSettingsViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		3318CA301E0B4F56008100A5 /* LMXSourcesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 3318CA2F1E0B4F56008100A5 /* LMXSourcesDataSource.m */; };
+		336804961E10D277003E9646 /* LMXSourcesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 336804951E10D277003E9646 /* LMXSourcesViewController.m */; };
+		336804991E10D35B003E9646 /* LMXSourceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 336804981E10D35B003E9646 /* LMXSourceCell.m */; };
+		3368049D1E10D89E003E9646 /* FeatureCatalogItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3368049C1E10D89E003E9646 /* FeatureCatalogItem.m */; };
+		336804A01E10D910003E9646 /* FeatureCatalogSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3368049F1E10D910003E9646 /* FeatureCatalogSection.m */; };
+		336804A41E10DC88003E9646 /* LMXSettingsItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 336804A31E10DC88003E9646 /* LMXSettingsItem.m */; };
+		336804A81E10DCCA003E9646 /* LMXSettingsSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 336804A71E10DCCA003E9646 /* LMXSettingsSection.m */; };
+		336804AC1E10DD29003E9646 /* LMXSettingsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 336804AB1E10DD29003E9646 /* LMXSettingsTableViewCell.m */; };
 		33922C561DFD132B00E9B088 /* DefaultPageOptionsList.m in Sources */ = {isa = PBXBuildFile; fileRef = 33922C551DFD132B00E9B088 /* DefaultPageOptionsList.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BC2569201DF00B4D000EA2C3 /* UIColor+CydiaColors.m in Sources */ = {isa = PBXBuildFile; fileRef = BC25691F1DF00B4D000EA2C3 /* UIColor+CydiaColors.m */; };
 		FA01D21C1D1B22B100B49E70 /* DiskUsage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA01D20F1D1B22B100B49E70 /* DiskUsage.cpp */; };
@@ -572,8 +580,24 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		33109EA91DF64A8C00066548 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
-		33109EAC1DF64BA200066548 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		33109EA91DF64A8C00066548 /* LMXSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMXSettingsViewController.h; sourceTree = "<group>"; };
+		33109EAC1DF64BA200066548 /* LMXSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMXSettingsViewController.m; sourceTree = "<group>"; };
+		3318CA2E1E0B4EB6008100A5 /* LMXSourcesDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LMXSourcesDataSource.h; sourceTree = "<group>"; };
+		3318CA2F1E0B4F56008100A5 /* LMXSourcesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMXSourcesDataSource.m; sourceTree = "<group>"; };
+		336804941E10D24F003E9646 /* LMXSourcesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LMXSourcesViewController.h; sourceTree = "<group>"; };
+		336804951E10D277003E9646 /* LMXSourcesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMXSourcesViewController.m; sourceTree = "<group>"; };
+		336804971E10D33A003E9646 /* LMXSourceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LMXSourceCell.h; sourceTree = "<group>"; };
+		336804981E10D35B003E9646 /* LMXSourceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMXSourceCell.m; sourceTree = "<group>"; };
+		3368049B1E10D86B003E9646 /* FeatureCatalogItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeatureCatalogItem.h; sourceTree = "<group>"; };
+		3368049C1E10D89E003E9646 /* FeatureCatalogItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeatureCatalogItem.m; sourceTree = "<group>"; };
+		3368049E1E10D8E8003E9646 /* FeatureCatalogSection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeatureCatalogSection.h; sourceTree = "<group>"; };
+		3368049F1E10D910003E9646 /* FeatureCatalogSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeatureCatalogSection.m; sourceTree = "<group>"; };
+		336804A21E10DC66003E9646 /* LMXSettingsItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LMXSettingsItem.h; sourceTree = "<group>"; };
+		336804A31E10DC88003E9646 /* LMXSettingsItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMXSettingsItem.m; sourceTree = "<group>"; };
+		336804A61E10DCB0003E9646 /* LMXSettingsSection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LMXSettingsSection.h; sourceTree = "<group>"; };
+		336804A71E10DCCA003E9646 /* LMXSettingsSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMXSettingsSection.m; sourceTree = "<group>"; };
+		336804AA1E10DD0D003E9646 /* LMXSettingsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LMXSettingsTableViewCell.h; sourceTree = "<group>"; };
+		336804AB1E10DD29003E9646 /* LMXSettingsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMXSettingsTableViewCell.m; sourceTree = "<group>"; };
 		33922C541DFD130000E9B088 /* DefaultPageOptionsList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultPageOptionsList.h; sourceTree = "<group>"; };
 		33922C551DFD132B00E9B088 /* DefaultPageOptionsList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultPageOptionsList.m; sourceTree = "<group>"; };
 		BC25691E1DF00B4D000EA2C3 /* UIColor+CydiaColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+CydiaColors.h"; sourceTree = "<group>"; };
@@ -1069,6 +1093,55 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3318CA2D1E0B4E51008100A5 /* Data Source */ = {
+			isa = PBXGroup;
+			children = (
+				3318CA2E1E0B4EB6008100A5 /* LMXSourcesDataSource.h */,
+				3318CA2F1E0B4F56008100A5 /* LMXSourcesDataSource.m */,
+			);
+			name = "Data Source";
+			sourceTree = "<group>";
+		};
+		3368049A1E10D852003E9646 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3368049B1E10D86B003E9646 /* FeatureCatalogItem.h */,
+				3368049C1E10D89E003E9646 /* FeatureCatalogItem.m */,
+				3368049E1E10D8E8003E9646 /* FeatureCatalogSection.h */,
+				3368049F1E10D910003E9646 /* FeatureCatalogSection.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		336804A11E10DC52003E9646 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				336804A51E10DC9B003E9646 /* Models */,
+				336804A91E10DCED003E9646 /* Views */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		336804A51E10DC9B003E9646 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				336804A21E10DC66003E9646 /* LMXSettingsItem.h */,
+				336804A31E10DC88003E9646 /* LMXSettingsItem.m */,
+				336804A61E10DCB0003E9646 /* LMXSettingsSection.h */,
+				336804A71E10DCCA003E9646 /* LMXSettingsSection.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		336804A91E10DCED003E9646 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				336804AA1E10DD0D003E9646 /* LMXSettingsTableViewCell.h */,
+				336804AB1E10DD29003E9646 /* LMXSettingsTableViewCell.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		FA01D20B1D1B229200B49E70 /* Legacy */ = {
 			isa = PBXGroup;
 			children = (
@@ -1976,6 +2049,7 @@
 		FA6C86C71D760B3600FB99CF /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				336804A11E10DC52003E9646 /* Settings */,
 				FA6C86C81D760B4600FB99CF /* View Controllers */,
 			);
 			path = Home;
@@ -1986,8 +2060,8 @@
 			children = (
 				FA6C86C91D760B6600FB99CF /* HomeController.h */,
 				FA6C86CA1D760B6600FB99CF /* HomeController.mm */,
-				33109EA91DF64A8C00066548 /* SettingsViewController.h */,
-				33109EAC1DF64BA200066548 /* SettingsViewController.m */,
+				33109EA91DF64A8C00066548 /* LMXSettingsViewController.h */,
+				33109EAC1DF64BA200066548 /* LMXSettingsViewController.m */,
 				33922C541DFD130000E9B088 /* DefaultPageOptionsList.h */,
 				33922C551DFD132B00E9B088 /* DefaultPageOptionsList.m */,
 			);
@@ -2032,6 +2106,7 @@
 		FA6C86EB1D76227000FB99CF /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				3318CA2D1E0B4E51008100A5 /* Data Source */,
 				FA6C86F01D76231400FB99CF /* View Controllers */,
 				FA6C86EC1D76227B00FB99CF /* Views */,
 			);
@@ -2043,6 +2118,8 @@
 			children = (
 				FA6C86ED1D76228B00FB99CF /* SourceCell.h */,
 				FA6C86EE1D76228B00FB99CF /* SourceCell.mm */,
+				336804971E10D33A003E9646 /* LMXSourceCell.h */,
+				336804981E10D35B003E9646 /* LMXSourceCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2052,6 +2129,8 @@
 			children = (
 				FA6C86F11D76236200FB99CF /* SourcesController.h */,
 				FA6C86F21D76236200FB99CF /* SourcesController.mm */,
+				336804941E10D24F003E9646 /* LMXSourcesViewController.h */,
+				336804951E10D277003E9646 /* LMXSourcesViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -2352,6 +2431,7 @@
 		FAE642961DF13EC200E975B8 /* Feature Catalog */ = {
 			isa = PBXGroup;
 			children = (
+				3368049A1E10D852003E9646 /* Models */,
 				FAE6429A1DF13EC200E975B8 /* FeatureCatalogAppDelegate.h */,
 				FAE6429B1DF13EC200E975B8 /* FeatureCatalogAppDelegate.m */,
 				FAE6429D1DF13EC200E975B8 /* CatalogTableViewController.h */,
@@ -2502,12 +2582,10 @@
 				TargetAttributes = {
 					FA28E7091D1B21A5003D3724 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = E6QK4MU6LM;
 						ProvisioningStyle = Automatic;
 					};
 					FA3A18321DEAB1F3000557AC = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = E6QK4MU6LM;
 						ProvisioningStyle = Automatic;
 					};
 					FA9010FA1DE12B1C00A607AC = {
@@ -2732,13 +2810,14 @@
 				FA6C86891D758DC700FB99CF /* Logging.mm in Sources */,
 				FAC1A72B1DEFA688008256A4 /* LMXLaunchProcess.m in Sources */,
 				FA5684B41DF60448000A4EBD /* LMXAPTSource+APTLib.mm in Sources */,
+				3318CA301E0B4F56008100A5 /* LMXSourcesDataSource.m in Sources */,
 				FA6C86C01D76097400FB99CF /* CYPackageController.mm in Sources */,
 				FA6C86E41D7620A900FB99CF /* SearchController.mm in Sources */,
 				FA6C869C1D75940600FB99CF /* NSURL+Cydia.mm in Sources */,
 				FA23E2C11D774FEA001FBE4A /* Application.mm in Sources */,
 				FA6C86D11D760C9200FB99CF /* UINavigationController+Cydia.mm in Sources */,
 				FA23E2DE1D77734C001FBE4A /* NSDOMNodeList+Hooks.mm in Sources */,
-				33109EAD1DF64BA300066548 /* SettingsViewController.m in Sources */,
+				33109EAD1DF64BA300066548 /* LMXSettingsViewController.m in Sources */,
 				FA0311BF1D1B2CFD008690CA /* LoadingView.mm in Sources */,
 				FA6C86CB1D760B6600FB99CF /* HomeController.mm in Sources */,
 				FA6C86DB1D761EE400FB99CF /* SectionController.mm in Sources */,
@@ -2769,6 +2848,7 @@
 				FA6C86F81D7625E700FB99CF /* StashController.mm in Sources */,
 				FA6D8CAE1D74812500283EDB /* Profiling.mm in Sources */,
 				FAA811AF1D745FF700C674C9 /* main.mm in Sources */,
+				336804961E10D277003E9646 /* LMXSourcesViewController.m in Sources */,
 				FA0311AE1D1B2CBD008690CA /* WebViewController.mm in Sources */,
 				FA6C86861D758D4000FB99CF /* Section.mm in Sources */,
 				FA6C866E1D75722D00FB99CF /* CytoreHelpers.mm in Sources */,
@@ -2779,6 +2859,7 @@
 				FA6C86BD1D76090800FB99CF /* FileTable.mm in Sources */,
 				FA6C864C1D74B26C00FB99CF /* SystemHelpers.mm in Sources */,
 				FA6C865E1D74C2AE00FB99CF /* Delegates.mm in Sources */,
+				336804A81E10DCCA003E9646 /* LMXSettingsSection.m in Sources */,
 				FA5684AF1DF6040F000A4EBD /* LMXAPTSource.m in Sources */,
 				FA0311B01D1B2CBD008690CA /* invocationWithSelector.mm in Sources */,
 				FA6C86971D75910E00FB99CF /* CydiaWebViewController.mm in Sources */,
@@ -2792,9 +2873,11 @@
 				FA6C86471D74B04F00FB99CF /* CFArray+Sort.mm in Sources */,
 				FA6C86B61D75F26C00FB99CF /* PackageCell.mm in Sources */,
 				FA06A3BF1DDEE98000AA9B02 /* Platform.m in Sources */,
+				336804A41E10DC88003E9646 /* LMXSettingsItem.m in Sources */,
 				FA6C865A1D74C0C400FB99CF /* GeneralHelpers.mm in Sources */,
 				FA6C864F1D74BCB300FB99CF /* UIGlobals.mm in Sources */,
 				FA5684BD1DF7318F000A4EBD /* LMXAPTConfig.mm in Sources */,
+				336804AC1E10DD29003E9646 /* LMXSettingsTableViewCell.m in Sources */,
 				FA01D21C1D1B22B100B49E70 /* DiskUsage.cpp in Sources */,
 				FA6C86331D74A97100FB99CF /* NSString+Cydia.mm in Sources */,
 				FA5684C11DF73BCA000A4EBD /* APTManager+Files.m in Sources */,
@@ -2806,6 +2889,7 @@
 				FA6C86831D75797700FB99CF /* Package.mm in Sources */,
 				FA23E2C81D7754A0001FBE4A /* Display.mm in Sources */,
 				FAE6AB591DFCD6F9006F0CAA /* NSString+Paths.m in Sources */,
+				336804991E10D35B003E9646 /* LMXSourceCell.m in Sources */,
 				FA5684B91DF72B3F000A4EBD /* Paths+APT.m in Sources */,
 				FA23E2D71D776C93001FBE4A /* WAKWindow+Hooks.mm in Sources */,
 				FA0311A61D1B2CBD008690CA /* dispatchEvent.mm in Sources */,
@@ -2847,10 +2931,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA5684BE1DF7318F000A4EBD /* LMXAPTConfig.mm in Sources */,
+				336804A01E10D910003E9646 /* FeatureCatalogSection.m in Sources */,
 				FAE642B11DF1433100E975B8 /* LMXRespringViewController.m in Sources */,
 				FA5684BA1DF72B3F000A4EBD /* Paths+APT.m in Sources */,
 				FAE6429F1DF13EC200E975B8 /* CatalogTableViewController.m in Sources */,
 				FA5684891DF5FA6F000A4EBD /* Platform.m in Sources */,
+				3368049D1E10D89E003E9646 /* FeatureCatalogItem.m in Sources */,
 				FA56848A1DF5FA74000A4EBD /* Device.mm in Sources */,
 				FA5684B51DF60448000A4EBD /* LMXAPTSource+APTLib.mm in Sources */,
 				FAE6429C1DF13EC200E975B8 /* FeatureCatalogAppDelegate.m in Sources */,

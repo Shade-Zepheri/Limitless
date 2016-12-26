@@ -29,7 +29,7 @@
 #import "LoadingViewController.h"
 #import "SourcesController.h"
 #import "HomeController.h"
-#import "SettingsViewController.h"
+#import "LMXSettingsViewController.h"
 #import "DefaultPageOptionsList.h"
 #import "SectionsController.h"
 #import "ChangesController.h"

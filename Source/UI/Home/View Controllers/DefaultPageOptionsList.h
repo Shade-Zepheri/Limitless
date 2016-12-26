@@ -2,8 +2,7 @@
 //  DefaultPageOptionsList.h
 //  Limitless
 //
-//  Created by Shade Zepheri on 12/10/16.
-//  Copyright © 2016 Limitless. All rights reserved.
+//  Created on 12/10/16.
 //
 
 #import <UIKit/UIKit.h>
@@ -13,4 +12,3 @@
 @property (nonatomic, strong) UITableView *table;
 
 @end
-
