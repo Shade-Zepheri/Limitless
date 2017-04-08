@@ -24,10 +24,10 @@
 @implementation APTManager
 
 + (instancetype)sharedInstance {
-    static APTManager *sharedInstance;
+    static APTManager *sharedInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sharedInstance = [APTManager new];
+        sharedInstance = [self new];
     });
     return sharedInstance;
 }

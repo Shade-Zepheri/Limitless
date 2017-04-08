@@ -79,13 +79,9 @@
     loaded_ = NO;
 }
 
-- (void) setView:(UIView *)view {
-    // Nasty hack for 2.x-compatibility. In 3.0+, we can and
-    // should just override -viewDidUnload instead.
-    if (view == nil)
-        [self releaseSubviews];
-
-    [super setView:view];
+- (void)didReceiveMemoryWarning {
+    [self releaseSubviews];
+    [super didReceiveMemoryWarning];
 }
 
 - (void) reloadData {
@@ -108,8 +104,10 @@
 }
 
 - (void) setPageColor:(UIColor *)color {
-    if (color == nil)
+    if (!color) {
         color = [UIColor groupTableViewBackgroundColor];
+    }
+    
     color_ = color;
 }
 

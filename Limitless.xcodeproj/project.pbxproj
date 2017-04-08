@@ -27,10 +27,10 @@
 		336804991E10D35B003E9646 /* LMXSourceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 336804981E10D35B003E9646 /* LMXSourceCell.m */; };
 		3368049D1E10D89E003E9646 /* FeatureCatalogItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3368049C1E10D89E003E9646 /* FeatureCatalogItem.m */; };
 		336804A01E10D910003E9646 /* FeatureCatalogSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3368049F1E10D910003E9646 /* FeatureCatalogSection.m */; };
-		336804A41E10DC88003E9646 /* LMXSettingsItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 336804A31E10DC88003E9646 /* LMXSettingsItem.m */; };
 		336804A81E10DCCA003E9646 /* LMXSettingsSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 336804A71E10DCCA003E9646 /* LMXSettingsSection.m */; };
 		336804AC1E10DD29003E9646 /* LMXSettingsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 336804AB1E10DD29003E9646 /* LMXSettingsTableViewCell.m */; };
 		33922C561DFD132B00E9B088 /* DefaultPageOptionsList.m in Sources */ = {isa = PBXBuildFile; fileRef = 33922C551DFD132B00E9B088 /* DefaultPageOptionsList.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		33A7FA491E972E2300445161 /* LMXSettingsItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A7FA481E972E2300445161 /* LMXSettingsItem.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BC2569201DF00B4D000EA2C3 /* UIColor+CydiaColors.m in Sources */ = {isa = PBXBuildFile; fileRef = BC25691F1DF00B4D000EA2C3 /* UIColor+CydiaColors.m */; };
 		FA01D21C1D1B22B100B49E70 /* DiskUsage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA01D20F1D1B22B100B49E70 /* DiskUsage.cpp */; };
 		FA01D21D1D1B22B100B49E70 /* lookup3.c in Sources */ = {isa = PBXBuildFile; fileRef = FA01D2111D1B22B100B49E70 /* lookup3.c */; };
@@ -593,13 +593,13 @@
 		3368049E1E10D8E8003E9646 /* FeatureCatalogSection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeatureCatalogSection.h; sourceTree = "<group>"; };
 		3368049F1E10D910003E9646 /* FeatureCatalogSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeatureCatalogSection.m; sourceTree = "<group>"; };
 		336804A21E10DC66003E9646 /* LMXSettingsItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LMXSettingsItem.h; sourceTree = "<group>"; };
-		336804A31E10DC88003E9646 /* LMXSettingsItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMXSettingsItem.m; sourceTree = "<group>"; };
 		336804A61E10DCB0003E9646 /* LMXSettingsSection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LMXSettingsSection.h; sourceTree = "<group>"; };
 		336804A71E10DCCA003E9646 /* LMXSettingsSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMXSettingsSection.m; sourceTree = "<group>"; };
 		336804AA1E10DD0D003E9646 /* LMXSettingsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LMXSettingsTableViewCell.h; sourceTree = "<group>"; };
 		336804AB1E10DD29003E9646 /* LMXSettingsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMXSettingsTableViewCell.m; sourceTree = "<group>"; };
 		33922C541DFD130000E9B088 /* DefaultPageOptionsList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultPageOptionsList.h; sourceTree = "<group>"; };
 		33922C551DFD132B00E9B088 /* DefaultPageOptionsList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultPageOptionsList.m; sourceTree = "<group>"; };
+		33A7FA481E972E2300445161 /* LMXSettingsItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMXSettingsItem.m; sourceTree = "<group>"; };
 		BC25691E1DF00B4D000EA2C3 /* UIColor+CydiaColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+CydiaColors.h"; sourceTree = "<group>"; };
 		BC25691F1DF00B4D000EA2C3 /* UIColor+CydiaColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CydiaColors.m"; sourceTree = "<group>"; };
 		FA01D20C1D1B22B100B49E70 /* cfversion.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = cfversion.mm; sourceTree = "<group>"; };
@@ -1126,7 +1126,7 @@
 			isa = PBXGroup;
 			children = (
 				336804A21E10DC66003E9646 /* LMXSettingsItem.h */,
-				336804A31E10DC88003E9646 /* LMXSettingsItem.m */,
+				33A7FA481E972E2300445161 /* LMXSettingsItem.m */,
 				336804A61E10DCB0003E9646 /* LMXSettingsSection.h */,
 				336804A71E10DCCA003E9646 /* LMXSettingsSection.m */,
 			);
@@ -2864,6 +2864,7 @@
 				FA0311B01D1B2CBD008690CA /* invocationWithSelector.mm in Sources */,
 				FA6C86971D75910E00FB99CF /* CydiaWebViewController.mm in Sources */,
 				FA3D50DA1DED8C870046A0AC /* LMXLocalizedTableSections.mm in Sources */,
+				33A7FA491E972E2300445161 /* LMXSettingsItem.m in Sources */,
 				FA6C86DE1D761F3600FB99CF /* SectionsController.mm in Sources */,
 				FA6C863F1D74AC6E00FB99CF /* DisplayHelpers.mm in Sources */,
 				FA6C86EA1D7621CC00FB99CF /* InstalledController.mm in Sources */,
@@ -2873,7 +2874,6 @@
 				FA6C86471D74B04F00FB99CF /* CFArray+Sort.mm in Sources */,
 				FA6C86B61D75F26C00FB99CF /* PackageCell.mm in Sources */,
 				FA06A3BF1DDEE98000AA9B02 /* Platform.m in Sources */,
-				336804A41E10DC88003E9646 /* LMXSettingsItem.m in Sources */,
 				FA6C865A1D74C0C400FB99CF /* GeneralHelpers.mm in Sources */,
 				FA6C864F1D74BCB300FB99CF /* UIGlobals.mm in Sources */,
 				FA5684BD1DF7318F000A4EBD /* LMXAPTConfig.mm in Sources */,

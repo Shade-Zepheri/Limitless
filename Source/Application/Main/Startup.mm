@@ -40,15 +40,18 @@
     if (![Device isSimulator]) {
         [self rerouteNSLogToPersistentFile];
     }
+
     [self updateExternalKeepAliveStatus:NO];
     [self setUpLegacyGlobals];
-    
+
+
+        
     if ([Device isSimulator]) {
         setenv("PATH", "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin", true);
         unsetenv("DYLD_ROOT_PATH");
         unsetenv("DYLD_INSERT_LIBRARIES");
         unsetenv("DYLD_LIBRARY_PATH");
-        
+            
     }
 }
 
@@ -291,25 +294,25 @@ static const char * CydiaNotifyName = "com.saurik.Cydia.status";
                                initWithContentsOfFile:metaDataPlistPath]
                               autorelease];
     
-    if (Values_ == nil)
+    if (!Values_)
         Values_ = [metadata objectForKey:@"Values"];
-    if (Values_ == nil)
+    if (!Values_)
         Values_ = [[[NSMutableDictionary alloc] initWithCapacity:4] autorelease];
     
-    if (Sections_ == nil)
+    if (!Sections_)
         Sections_ = [metadata objectForKey:@"Sections"];
-    if (Sections_ == nil)
+    if (!Sections_)
         Sections_ = [[[NSMutableDictionary alloc] initWithCapacity:32] autorelease];
     
-    if (Sources_ == nil)
+    if (!Sources_)
         Sources_ = [metadata objectForKey:@"Sources"];
-    if (Sources_ == nil)
+    if (!Sources_)
         Sources_ = [[[NSMutableDictionary alloc] initWithCapacity:0] autorelease];
     
     // XXX: this wrong, but in a way that doesn't matter :/
-    if (Version_ == nil)
+    if (!Version_)
         Version_ = [metadata objectForKey:@"Version"];
-    if (Version_ == nil)
+    if (!Version_)
         Version_ = [NSNumber numberWithUnsignedInt:0];
     
     if (NSDictionary *packages = [metadata objectForKey:@"Packages"]) {

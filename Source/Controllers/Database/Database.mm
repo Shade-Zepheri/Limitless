@@ -18,12 +18,13 @@
 
 @implementation Database
 
-+ (Database *) sharedInstance {
-    static _H<Database> instance;
-    if (instance == nil) {
-        instance = [[Database new] autorelease];
-    }
-    return instance;
++ (instancetype)sharedInstance {
+    static _H<Database> sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[self new] autorelease];
+    });
+    return sharedInstance;
 }
 
 - (unsigned) era {
@@ -149,8 +150,9 @@
         return iterator.end() ? nil : [Package packageWithIterator:iterator withZone:NULL inPool:NULL database:self];
     } }
 
-- (id) init {
-    if ((self = [super init]) != nil) {
+- (instancetype)init {
+    self = [super init];
+    if (self) {
         policy_ = NULL;
         records_ = NULL;
         resolver_ = NULL;
@@ -161,10 +163,11 @@
         zone_ = NSCreateZone(1024 * 1024, 256 * 1024, NO);
         
         size_t capacity(MetaFile_->active_);
-        if (capacity == 0)
+        if (capacity == 0) {
             capacity = 16384;
-        else
+        } else {
             capacity += 1024;
+        }
         
         packages_ = CFArrayCreateMutable(kCFAllocatorDefault, capacity, NULL);
         sourceList_ = [NSMutableArray arrayWithCapacity:16];
@@ -177,20 +180,12 @@
         _config->Set("APT::Keep-Fds::", cydiafd_);
         setenv("CYDIA", [[[[NSNumber numberWithInt:cydiafd_] stringValue] stringByAppendingString:@" 1"] UTF8String], _not(int));
         
-        [NSThread
-         detachNewThreadSelector:@selector(_readCydia:)
-         toTarget:self
-         withObject:[NSNumber numberWithInt:fds[0]]
-         ];
+        [NSThread detachNewThreadSelector:@selector(_readCydia:) toTarget:self withObject:[NSNumber numberWithInt:fds[0]]];
         
         _assert(pipe(fds) != -1);
         statusfd_ = fds[1];
         
-        [NSThread
-         detachNewThreadSelector:@selector(_readStatus:)
-         toTarget:self
-         withObject:[NSNumber numberWithInt:fds[0]]
-         ];
+        [NSThread detachNewThreadSelector:@selector(_readStatus:) toTarget:self withObject:[NSNumber numberWithInt:fds[0]]];
         
         _assert(pipe(fds) != -1);
         _assert(dup2(fds[0], 0) != -1);
@@ -202,11 +197,7 @@
         _assert(dup2(fds[1], 1) != -1);
         _assert(close(fds[1]) != -1);
         
-        [NSThread
-         detachNewThreadSelector:@selector(_readOutput:)
-         toTarget:self
-         withObject:[NSNumber numberWithInt:fds[0]]
-         ];
+        [NSThread detachNewThreadSelector:@selector(_readOutput:) toTarget:self withObject:[NSNumber numberWithInt:fds[0]]];
     } return self;
 }
 

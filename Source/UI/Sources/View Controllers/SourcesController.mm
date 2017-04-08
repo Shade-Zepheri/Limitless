@@ -112,7 +112,7 @@
     return cell;
 }
 
--(void)favoriteGestureRecognized:(UILongPressGestureRecognizer*)gestureRecognizer {
+- (void)favoriteGestureRecognized:(UILongPressGestureRecognizer*)gestureRecognizer {
     if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
         Source *currentSource([self sourceAtIndexPath:[list_ indexPathForCell:(UITableViewCell*)gestureRecognizer.view]]);
         
@@ -156,7 +156,7 @@
     }
 }
 
-- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     SectionsController *controller([[[SectionsController alloc]
                                      initWithDatabase:database_
                                      source:[self sourceAtIndexPath:indexPath]
@@ -465,8 +465,9 @@
     [super releaseSubviews];
 }
 
-- (id) initWithDatabase:(Database *)database {
-    if ((self = [super init]) != nil) {
+- (instancetype)initWithDatabase:(Database *)database {
+    self = [super init];
+    if (self) {
         database_ = database;
     } return self;
 }
@@ -487,13 +488,15 @@
         int count([sources_ count]);
         offset_ = 0;
         for (int i = 0; i != count; i++) {
-            if ([[sources_ objectAtIndex:i] record] == nil)
+            if (![[sources_ objectAtIndex:i] record]) {
                 break;
+            }
             offset_++;
         }
         
         [list_ reloadData];
-    } }
+    }
+}
 
 - (void) showAddSourcePrompt {
     UIAlertView *alert = [[[UIAlertView alloc]

@@ -96,40 +96,40 @@
     }
     [self setUpDatabase];
     [self setUpWindow];
-	[self setUpViewControllers];
-	[self setUpNavigationControllerAndTabBar];
-	
-	// - Homescreen Shortcut Start
-	
-	// If the app was opened from a shortcut
-	if (launchOptions[UIApplicationLaunchOptionsShortcutItemKey] != nil) {
-		// Handle it
-		UIApplicationShortcutItem *shortcutItem = (UIApplicationShortcutItem*)launchOptions[UIApplicationLaunchOptionsShortcutItemKey];
-		
-		if ([shortcutItem.type isEqualToString:@"respring"]) {
-			[self reloadSpringBoard];
-		} else if ([shortcutItem.type isEqualToString:@"safemode"]) {
-			[self enterSafeMode];
-			
-		// -(void)loadData has some pretty weird behaviour, so I have some code which sets the selectedIndex to 1 (sources), then have a function which selects the appropriate source based on the URL. Chances of URL conflict should be none.
-		} else if ([shortcutItem.type isEqualToString:@"repo1"] || [shortcutItem.type isEqualToString:@"repo2"]) {
-			travelToRepo = YES;
-			repoURL = (NSString*)shortcutItem.userInfo[@"repoURL"];
-		}
-	}
-	
-	// If the shortcuts haven't been set before
-	if (application.shortcutItems.count == 0) {
-		UIMutableApplicationShortcutItem* firstRepo = [[UIMutableApplicationShortcutItem alloc] initWithType:@"repo1" localizedTitle:@"Cydia/Telesphoreo" localizedSubtitle:nil icon:nil userInfo:@{@"repoURL": @"http://apt.saurik.com/"}];
-		UIMutableApplicationShortcutItem* secondRepo = [[UIMutableApplicationShortcutItem alloc] initWithType:@"repo2" localizedTitle:@"BigBoss" localizedSubtitle:nil icon:nil userInfo:@{@"repoURL": @"http://apt.thebigboss.org/repofiles/cydia/"}];
-			application.shortcutItems = @[firstRepo, secondRepo];
-	}
-	
-	// - Homescreen Shortcut End
-	
+    [self setUpViewControllers];
+    [self setUpNavigationControllerAndTabBar];
+        
+    // - Homescreen Shortcut Start
+        
+    // If the app was opened from a shortcut
+    if (launchOptions[UIApplicationLaunchOptionsShortcutItemKey]) {
+            // Handle it
+        UIApplicationShortcutItem *shortcutItem = (UIApplicationShortcutItem*)launchOptions[UIApplicationLaunchOptionsShortcutItemKey];
+            
+        if ([shortcutItem.type isEqualToString:@"respring"]) {
+            [self reloadSpringBoard];
+        } else if ([shortcutItem.type isEqualToString:@"safemode"]) {
+            [self enterSafeMode];
+                
+            // -(void)loadData has some pretty weird behaviour, so I have some code which sets the selectedIndex to 1 (sources), then have a function which selects the appropriate source based on the URL. Chances of URL conflict should be none.
+        } else if ([shortcutItem.type isEqualToString:@"repo1"] || [shortcutItem.type isEqualToString:@"repo2"]) {
+            travelToRepo = YES;
+            repoURL = (NSString*)shortcutItem.userInfo[@"repoURL"];
+        }
+    }
+        
+    // If the shortcuts haven't been set before
+    if (application.shortcutItems.count == 0) {
+        UIMutableApplicationShortcutItem* firstRepo = [[UIMutableApplicationShortcutItem alloc] initWithType:@"repo1" localizedTitle:@"Cydia/Telesphoreo" localizedSubtitle:nil icon:nil userInfo:@{@"repoURL": @"http://apt.saurik.com/"}];
+        UIMutableApplicationShortcutItem* secondRepo = [[UIMutableApplicationShortcutItem alloc] initWithType:@"repo2" localizedTitle:@"BigBoss" localizedSubtitle:nil icon:nil userInfo:@{@"repoURL": @"http://apt.thebigboss.org/repofiles/cydia/"}];
+            application.shortcutItems = @[firstRepo, secondRepo];
+    }
+        
+    // - Homescreen Shortcut End
+        
     [self performSelector:@selector(loadData) withObject:nil afterDelay:0];
     _trace();
-	
+    
 	return YES;
 }
 
@@ -190,7 +190,7 @@
 }
 
 - (void) applicationWillEnterForeground:(UIApplication *)application {
-    if (Backgrounded_ == nil)
+    if (!Backgrounded_)
         return;
     
     NSTimeInterval interval([Backgrounded_ timeIntervalSinceNow]);
@@ -277,11 +277,7 @@
 }
 
 - (void)setSharedURLCache {
-    CYURLCache *sharedURLCache = [[[CYURLCache alloc]
-                                   initWithMemoryCapacity:524288
-                                   diskCapacity:10485760
-                                   diskPath:[Paths cacheFile:@"SDURLCache"]]
-                                  autorelease];
+    CYURLCache *sharedURLCache = [[[CYURLCache alloc] initWithMemoryCapacity:524288 diskCapacity:10485760 diskPath:[Paths cacheFile:@"SDURLCache"]] autorelease];
     [NSURLCache setSharedURLCache:sharedURLCache];
 }
 
@@ -293,7 +289,7 @@
     Font18Bold_ = [UIFont boldSystemFontOfSize:18];
     Font22Bold_ = [UIFont boldSystemFontOfSize:22];
     
-    if(UIColor.isDarkModeEnabled) {
+    if (UIColor.isDarkModeEnabled) {
         [[UINavigationBar appearance] setBarTintColor:[UIColor cydia_tintColor]];
         [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
         [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
@@ -315,7 +311,7 @@
 }
 
 - (void)setUpWindow {
-    window_ = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+    window_ = [[[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds] autorelease];
     [window_ orderFront:self];
     [window_ makeKey:self];
     [window_ setHidden:NO];

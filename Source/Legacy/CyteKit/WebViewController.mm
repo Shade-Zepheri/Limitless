@@ -150,10 +150,11 @@ float CYScrollViewDecelerationRateNormal;
     dlopen("/System/Library/Frameworks/SafariServices.framework/SafariServices", RTLD_GLOBAL | RTLD_LAZY);
     $SFSafariViewController = objc_getClass("SFSafariViewController");
 
-    if (float *_UIScrollViewDecelerationRateNormal = reinterpret_cast<float *>(dlsym(RTLD_DEFAULT, "UIScrollViewDecelerationRateNormal")))
+    if (float *_UIScrollViewDecelerationRateNormal = reinterpret_cast<float *>(dlsym(RTLD_DEFAULT, "UIScrollViewDecelerationRateNormal"))) {
         CYScrollViewDecelerationRateNormal = *_UIScrollViewDecelerationRateNormal;
-    else // XXX: this actually might be fast on some older systems: we should look into this
+    } else {
         CYScrollViewDecelerationRateNormal = 0.998;
+    }// XXX: this actually might be fast on some older systems: we should look into this
 }
 
 - (bool) retainsNetworkActivityIndicator {
@@ -169,7 +170,7 @@ float CYScrollViewDecelerationRateNormal;
     }
 }
 
-- (void) dealloc {
+- (void)dealloc {
 #if LogBrowser
     NSLog(@"[CyteWebViewController dealloc]");
 #endif
@@ -237,7 +238,7 @@ float CYScrollViewDecelerationRateNormal;
 }
 
 - (void) reloadURLWithCache:(BOOL)cache {
-    if (request_ == nil)
+    if (!request_)
         return;
 
     NSMutableURLRequest *request([request_ mutableCopy]);

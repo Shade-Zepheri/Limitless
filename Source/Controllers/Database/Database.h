@@ -53,7 +53,7 @@ typedef std::map< unsigned long, _H<Source> > SourceMap;
     std::map<const char *, _H<NSString> > sections_;
 }
 
-+ (Database *) sharedInstance;
++ (instancetype)sharedInstance;
 - (unsigned) era;
 
 - (void) _readCydia:(NSNumber *)fd;
