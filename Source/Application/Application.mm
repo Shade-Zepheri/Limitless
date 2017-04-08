@@ -14,7 +14,6 @@
 #import "Networking.h"
 #import "Profiling.hpp"
 #import "Paths.h"
-#import "CYURLCache.h"
 #import "CydiaWebViewController.h"
 #import "CydiaURLProtocol.h"
 #import "Menes/Menes.h"
@@ -29,8 +28,6 @@
 #import "LoadingViewController.h"
 #import "SourcesController.h"
 #import "HomeController.h"
-#import "LMXSettingsViewController.h"
-#import "DefaultPageOptionsList.h"
 #import "SectionsController.h"
 #import "ChangesController.h"
 #import "InstalledController.h"
@@ -277,7 +274,11 @@
 }
 
 - (void)setSharedURLCache {
-    CYURLCache *sharedURLCache = [[[CYURLCache alloc] initWithMemoryCapacity:524288 diskCapacity:10485760 diskPath:[Paths cacheFile:@"SDURLCache"]] autorelease];
+    NSURLCache *sharedURLCache = [[[NSURLCache alloc]
+                                   initWithMemoryCapacity:10*1024*1024
+                                   diskCapacity:100*1024*1024
+                                   diskPath:[Paths cacheFile:@"NSURLCache"]]
+                                  autorelease];
     [NSURLCache setSharedURLCache:sharedURLCache];
 }
 

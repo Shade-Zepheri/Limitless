@@ -24,7 +24,7 @@
 @implementation SourcesController
 
 - (void) _releaseConnection:(NSURLConnection *)connection {
-    if (connection != nil) {
+    if (connection) {
         [connection cancel];
         //[connection setDelegate:nil];
         [connection release];

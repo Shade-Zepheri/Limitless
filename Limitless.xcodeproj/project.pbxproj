@@ -21,16 +21,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		33109EAD1DF64BA300066548 /* LMXSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33109EAC1DF64BA200066548 /* LMXSettingsViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		3318CA301E0B4F56008100A5 /* LMXSourcesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 3318CA2F1E0B4F56008100A5 /* LMXSourcesDataSource.m */; };
-		336804961E10D277003E9646 /* LMXSourcesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 336804951E10D277003E9646 /* LMXSourcesViewController.m */; };
-		336804991E10D35B003E9646 /* LMXSourceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 336804981E10D35B003E9646 /* LMXSourceCell.m */; };
-		3368049D1E10D89E003E9646 /* FeatureCatalogItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3368049C1E10D89E003E9646 /* FeatureCatalogItem.m */; };
-		336804A01E10D910003E9646 /* FeatureCatalogSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3368049F1E10D910003E9646 /* FeatureCatalogSection.m */; };
-		336804A81E10DCCA003E9646 /* LMXSettingsSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 336804A71E10DCCA003E9646 /* LMXSettingsSection.m */; };
-		336804AC1E10DD29003E9646 /* LMXSettingsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 336804AB1E10DD29003E9646 /* LMXSettingsTableViewCell.m */; };
-		33922C561DFD132B00E9B088 /* DefaultPageOptionsList.m in Sources */ = {isa = PBXBuildFile; fileRef = 33922C551DFD132B00E9B088 /* DefaultPageOptionsList.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		33A7FA491E972E2300445161 /* LMXSettingsItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A7FA481E972E2300445161 /* LMXSettingsItem.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BC2569201DF00B4D000EA2C3 /* UIColor+CydiaColors.m in Sources */ = {isa = PBXBuildFile; fileRef = BC25691F1DF00B4D000EA2C3 /* UIColor+CydiaColors.m */; };
 		FA01D21C1D1B22B100B49E70 /* DiskUsage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA01D20F1D1B22B100B49E70 /* DiskUsage.cpp */; };
 		FA01D21D1D1B22B100B49E70 /* lookup3.c in Sources */ = {isa = PBXBuildFile; fileRef = FA01D2111D1B22B100B49E70 /* lookup3.c */; };
@@ -58,7 +48,6 @@
 		FA0311B01D1B2CBD008690CA /* invocationWithSelector.mm in Sources */ = {isa = PBXBuildFile; fileRef = FA03119E1D1B2CBD008690CA /* invocationWithSelector.mm */; };
 		FA0311B11D1B2CBD008690CA /* radixSortWithSelector.mm in Sources */ = {isa = PBXBuildFile; fileRef = FA0311A31D1B2CBD008690CA /* radixSortWithSelector.mm */; };
 		FA0311B21D1B2CBD008690CA /* yieldToSelector.mm in Sources */ = {isa = PBXBuildFile; fileRef = FA0311A51D1B2CBD008690CA /* yieldToSelector.mm */; };
-		FA0311B61D1B2CDE008690CA /* SDURLCache.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0311B51D1B2CDE008690CA /* SDURLCache.m */; };
 		FA0311BF1D1B2CFD008690CA /* LoadingView.mm in Sources */ = {isa = PBXBuildFile; fileRef = FA0311B91D1B2CFD008690CA /* LoadingView.mm */; };
 		FA0311C01D1B2CFD008690CA /* LoadingViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = FA0311BB1D1B2CFD008690CA /* LoadingViewController.mm */; };
 		FA0311C11D1B2CFD008690CA /* MIMEAddress.mm in Sources */ = {isa = PBXBuildFile; fileRef = FA0311BD1D1B2CFD008690CA /* MIMEAddress.mm */; };
@@ -356,7 +345,6 @@
 		FA6C86EF1D76228B00FB99CF /* SourceCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = FA6C86EE1D76228B00FB99CF /* SourceCell.mm */; };
 		FA6C86F31D76236200FB99CF /* SourcesController.mm in Sources */ = {isa = PBXBuildFile; fileRef = FA6C86F21D76236200FB99CF /* SourcesController.mm */; };
 		FA6C86F81D7625E700FB99CF /* StashController.mm in Sources */ = {isa = PBXBuildFile; fileRef = FA6C86F71D7625E700FB99CF /* StashController.mm */; };
-		FA6C86FC1D7626B500FB99CF /* CYURLCache.mm in Sources */ = {isa = PBXBuildFile; fileRef = FA6C86FB1D7626B500FB99CF /* CYURLCache.mm */; };
 		FA6D8CAE1D74812500283EDB /* Profiling.mm in Sources */ = {isa = PBXBuildFile; fileRef = FA6D8CAD1D74812500283EDB /* Profiling.mm */; };
 		FA7DB9021DE0276D00F874E6 /* APTManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = FA7DB9011DE0276D00F874E6 /* APTManager.mm */; };
 		FA9073FD1D7456A900BA0D1D /* GraphicsServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA9073FC1D7456A900BA0D1D /* GraphicsServices.framework */; };
@@ -588,26 +576,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		33109EA91DF64A8C00066548 /* LMXSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMXSettingsViewController.h; sourceTree = "<group>"; };
-		33109EAC1DF64BA200066548 /* LMXSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMXSettingsViewController.m; sourceTree = "<group>"; };
-		3318CA2E1E0B4EB6008100A5 /* LMXSourcesDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LMXSourcesDataSource.h; sourceTree = "<group>"; };
-		3318CA2F1E0B4F56008100A5 /* LMXSourcesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMXSourcesDataSource.m; sourceTree = "<group>"; };
-		336804941E10D24F003E9646 /* LMXSourcesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LMXSourcesViewController.h; sourceTree = "<group>"; };
-		336804951E10D277003E9646 /* LMXSourcesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMXSourcesViewController.m; sourceTree = "<group>"; };
-		336804971E10D33A003E9646 /* LMXSourceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LMXSourceCell.h; sourceTree = "<group>"; };
-		336804981E10D35B003E9646 /* LMXSourceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMXSourceCell.m; sourceTree = "<group>"; };
-		3368049B1E10D86B003E9646 /* FeatureCatalogItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeatureCatalogItem.h; sourceTree = "<group>"; };
-		3368049C1E10D89E003E9646 /* FeatureCatalogItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeatureCatalogItem.m; sourceTree = "<group>"; };
-		3368049E1E10D8E8003E9646 /* FeatureCatalogSection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeatureCatalogSection.h; sourceTree = "<group>"; };
-		3368049F1E10D910003E9646 /* FeatureCatalogSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeatureCatalogSection.m; sourceTree = "<group>"; };
-		336804A21E10DC66003E9646 /* LMXSettingsItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LMXSettingsItem.h; sourceTree = "<group>"; };
-		336804A61E10DCB0003E9646 /* LMXSettingsSection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LMXSettingsSection.h; sourceTree = "<group>"; };
-		336804A71E10DCCA003E9646 /* LMXSettingsSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMXSettingsSection.m; sourceTree = "<group>"; };
-		336804AA1E10DD0D003E9646 /* LMXSettingsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LMXSettingsTableViewCell.h; sourceTree = "<group>"; };
-		336804AB1E10DD29003E9646 /* LMXSettingsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMXSettingsTableViewCell.m; sourceTree = "<group>"; };
-		33922C541DFD130000E9B088 /* DefaultPageOptionsList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultPageOptionsList.h; sourceTree = "<group>"; };
-		33922C551DFD132B00E9B088 /* DefaultPageOptionsList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultPageOptionsList.m; sourceTree = "<group>"; };
-		33A7FA481E972E2300445161 /* LMXSettingsItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMXSettingsItem.m; sourceTree = "<group>"; };
 		BC25691E1DF00B4D000EA2C3 /* UIColor+CydiaColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+CydiaColors.h"; sourceTree = "<group>"; };
 		BC25691F1DF00B4D000EA2C3 /* UIColor+CydiaColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CydiaColors.m"; sourceTree = "<group>"; };
 		FA01D20C1D1B22B100B49E70 /* cfversion.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = cfversion.mm; sourceTree = "<group>"; };
@@ -669,8 +637,6 @@
 		FA0311A31D1B2CBD008690CA /* radixSortWithSelector.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = radixSortWithSelector.mm; sourceTree = "<group>"; };
 		FA0311A41D1B2CBD008690CA /* yieldToSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = yieldToSelector.h; sourceTree = "<group>"; };
 		FA0311A51D1B2CBD008690CA /* yieldToSelector.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = yieldToSelector.mm; sourceTree = "<group>"; };
-		FA0311B41D1B2CDE008690CA /* SDURLCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDURLCache.h; sourceTree = "<group>"; };
-		FA0311B51D1B2CDE008690CA /* SDURLCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDURLCache.m; sourceTree = "<group>"; };
 		FA0311B81D1B2CFD008690CA /* LoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingView.h; sourceTree = "<group>"; };
 		FA0311B91D1B2CFD008690CA /* LoadingView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LoadingView.mm; sourceTree = "<group>"; };
 		FA0311BA1D1B2CFD008690CA /* LoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingViewController.h; sourceTree = "<group>"; };
@@ -1020,8 +986,6 @@
 		FA6C86F21D76236200FB99CF /* SourcesController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SourcesController.mm; sourceTree = "<group>"; };
 		FA6C86F61D7625E700FB99CF /* StashController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StashController.h; sourceTree = "<group>"; };
 		FA6C86F71D7625E700FB99CF /* StashController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = StashController.mm; sourceTree = "<group>"; };
-		FA6C86FA1D7626B500FB99CF /* CYURLCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYURLCache.h; sourceTree = "<group>"; };
-		FA6C86FB1D7626B500FB99CF /* CYURLCache.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CYURLCache.mm; sourceTree = "<group>"; };
 		FA6D8CAC1D74812500283EDB /* Profiling.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Profiling.hpp; sourceTree = "<group>"; };
 		FA6D8CAD1D74812500283EDB /* Profiling.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Profiling.mm; sourceTree = "<group>"; };
 		FA7DB9001DE0276D00F874E6 /* APTManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APTManager.h; sourceTree = "<group>"; };
@@ -1107,60 +1071,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3318CA2D1E0B4E51008100A5 /* Data Source */ = {
-			isa = PBXGroup;
-			children = (
-				3318CA2E1E0B4EB6008100A5 /* LMXSourcesDataSource.h */,
-				3318CA2F1E0B4F56008100A5 /* LMXSourcesDataSource.m */,
-			);
-			name = "Data Source";
-			sourceTree = "<group>";
-		};
-		3368049A1E10D852003E9646 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				3368049B1E10D86B003E9646 /* FeatureCatalogItem.h */,
-				3368049C1E10D89E003E9646 /* FeatureCatalogItem.m */,
-				3368049E1E10D8E8003E9646 /* FeatureCatalogSection.h */,
-				3368049F1E10D910003E9646 /* FeatureCatalogSection.m */,
-			);
-			name = Models;
-			sourceTree = "<group>";
-		};
-		336804A11E10DC52003E9646 /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				336804A51E10DC9B003E9646 /* Models */,
-				336804A91E10DCED003E9646 /* Views */,
-			);
-			name = Settings;
-			sourceTree = "<group>";
-		};
-		336804A51E10DC9B003E9646 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				336804A21E10DC66003E9646 /* LMXSettingsItem.h */,
-				33A7FA481E972E2300445161 /* LMXSettingsItem.m */,
-				336804A61E10DCB0003E9646 /* LMXSettingsSection.h */,
-				336804A71E10DCCA003E9646 /* LMXSettingsSection.m */,
-			);
-			name = Models;
-			sourceTree = "<group>";
-		};
-		336804A91E10DCED003E9646 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				336804AA1E10DD0D003E9646 /* LMXSettingsTableViewCell.h */,
-				336804AB1E10DD29003E9646 /* LMXSettingsTableViewCell.m */,
-			);
-			name = Views;
-			sourceTree = "<group>";
-		};
 		FA01D20B1D1B229200B49E70 /* Legacy */ = {
 			isa = PBXGroup;
 			children = (
 				FA0311B71D1B2CFD008690CA /* Cydia */,
-				FA0311B31D1B2CCC008690CA /* SDURLCache */,
 				FA03117F1D1B2CBD008690CA /* CyteKit */,
 				FA03119B1D1B2CBD008690CA /* Menes */,
 				FA01D20C1D1B22B100B49E70 /* cfversion.mm */,
@@ -1228,15 +1142,6 @@
 				FA0311A51D1B2CBD008690CA /* yieldToSelector.mm */,
 			);
 			path = Menes;
-			sourceTree = "<group>";
-		};
-		FA0311B31D1B2CCC008690CA /* SDURLCache */ = {
-			isa = PBXGroup;
-			children = (
-				FA0311B41D1B2CDE008690CA /* SDURLCache.h */,
-				FA0311B51D1B2CDE008690CA /* SDURLCache.m */,
-			);
-			path = SDURLCache;
 			sourceTree = "<group>";
 		};
 		FA0311B71D1B2CFD008690CA /* Cydia */ = {
@@ -2072,7 +1977,6 @@
 		FA6C86C71D760B3600FB99CF /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				336804A11E10DC52003E9646 /* Settings */,
 				FA6C86C81D760B4600FB99CF /* View Controllers */,
 			);
 			path = Home;
@@ -2083,10 +1987,6 @@
 			children = (
 				FA6C86C91D760B6600FB99CF /* HomeController.h */,
 				FA6C86CA1D760B6600FB99CF /* HomeController.mm */,
-				33109EA91DF64A8C00066548 /* LMXSettingsViewController.h */,
-				33109EAC1DF64BA200066548 /* LMXSettingsViewController.m */,
-				33922C541DFD130000E9B088 /* DefaultPageOptionsList.h */,
-				33922C551DFD132B00E9B088 /* DefaultPageOptionsList.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -2175,15 +2075,6 @@
 			path = "View Controllers";
 			sourceTree = "<group>";
 		};
-		FA6C86F91D7626A300FB99CF /* Cache */ = {
-			isa = PBXGroup;
-			children = (
-				FA6C86FA1D7626B500FB99CF /* CYURLCache.h */,
-				FA6C86FB1D7626B500FB99CF /* CYURLCache.mm */,
-			);
-			path = Cache;
-			sourceTree = "<group>";
-		};
 		FA6D8CA31D746B6B00283EDB /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -2202,7 +2093,6 @@
 			isa = PBXGroup;
 			children = (
 				FA7DB8FF1DE0275000F874E6 /* APT */,
-				FA6C86F91D7626A300FB99CF /* Cache */,
 				FA6C86D51D761E1300FB99CF /* URL Handler */,
 				FA6C86621D74C48400FB99CF /* Database */,
 				FA3D50D71DED8BFF0046A0AC /* Localization */,
@@ -2454,7 +2344,6 @@
 		FAE642961DF13EC200E975B8 /* Feature Catalog */ = {
 			isa = PBXGroup;
 			children = (
-				3368049A1E10D852003E9646 /* Models */,
 				FAE6429A1DF13EC200E975B8 /* FeatureCatalogAppDelegate.h */,
 				FAE6429B1DF13EC200E975B8 /* FeatureCatalogAppDelegate.m */,
 				FAE6429D1DF13EC200E975B8 /* CatalogTableViewController.h */,
@@ -2605,10 +2494,12 @@
 				TargetAttributes = {
 					FA28E7091D1B21A5003D3724 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = E6QK4MU6LM;
 						ProvisioningStyle = Automatic;
 					};
 					FA3A18321DEAB1F3000557AC = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = E6QK4MU6LM;
 						ProvisioningStyle = Automatic;
 					};
 					FA9010FA1DE12B1C00A607AC = {
@@ -2828,19 +2719,16 @@
 			files = (
 				FA6C86651D74C49B00FB99CF /* Database.mm in Sources */,
 				FA0311AA1D1B2CBD008690CA /* TableViewCell.mm in Sources */,
-				FA6C86FC1D7626B500FB99CF /* CYURLCache.mm in Sources */,
 				FAE642B41DF14B9B00E975B8 /* LMXRespringController.m in Sources */,
 				FA6C86891D758DC700FB99CF /* Logging.mm in Sources */,
 				FAC1A72B1DEFA688008256A4 /* LMXLaunchProcess.m in Sources */,
 				FA5684B41DF60448000A4EBD /* LMXAPTSource+APTLib.mm in Sources */,
-				3318CA301E0B4F56008100A5 /* LMXSourcesDataSource.m in Sources */,
 				FA6C86C01D76097400FB99CF /* CYPackageController.mm in Sources */,
 				FA6C86E41D7620A900FB99CF /* SearchController.mm in Sources */,
 				FA6C869C1D75940600FB99CF /* NSURL+Cydia.mm in Sources */,
 				FA23E2C11D774FEA001FBE4A /* Application.mm in Sources */,
 				FA6C86D11D760C9200FB99CF /* UINavigationController+Cydia.mm in Sources */,
 				FA23E2DE1D77734C001FBE4A /* NSDOMNodeList+Hooks.mm in Sources */,
-				33109EAD1DF64BA300066548 /* LMXSettingsViewController.m in Sources */,
 				FA0311BF1D1B2CFD008690CA /* LoadingView.mm in Sources */,
 				FA6C86CB1D760B6600FB99CF /* HomeController.mm in Sources */,
 				FA6C86DB1D761EE400FB99CF /* SectionController.mm in Sources */,
@@ -2872,7 +2760,6 @@
 				FA6C86F81D7625E700FB99CF /* StashController.mm in Sources */,
 				FA6D8CAE1D74812500283EDB /* Profiling.mm in Sources */,
 				FAA811AF1D745FF700C674C9 /* main.mm in Sources */,
-				336804961E10D277003E9646 /* LMXSourcesViewController.m in Sources */,
 				FA0311AE1D1B2CBD008690CA /* WebViewController.mm in Sources */,
 				FA6C86861D758D4000FB99CF /* Section.mm in Sources */,
 				FA6C866E1D75722D00FB99CF /* CytoreHelpers.mm in Sources */,
@@ -2884,16 +2771,13 @@
 				FA6C86BD1D76090800FB99CF /* FileTable.mm in Sources */,
 				FA6C864C1D74B26C00FB99CF /* SystemHelpers.mm in Sources */,
 				FA6C865E1D74C2AE00FB99CF /* Delegates.mm in Sources */,
-				336804A81E10DCCA003E9646 /* LMXSettingsSection.m in Sources */,
 				FA5684AF1DF6040F000A4EBD /* LMXAPTSource.m in Sources */,
 				FA0311B01D1B2CBD008690CA /* invocationWithSelector.mm in Sources */,
 				FA6C86971D75910E00FB99CF /* CydiaWebViewController.mm in Sources */,
 				FA3D50DA1DED8C870046A0AC /* LMXLocalizedTableSections.mm in Sources */,
-				33A7FA491E972E2300445161 /* LMXSettingsItem.m in Sources */,
 				FA6C86DE1D761F3600FB99CF /* SectionsController.mm in Sources */,
 				FA6C863F1D74AC6E00FB99CF /* DisplayHelpers.mm in Sources */,
 				FA6C86EA1D7621CC00FB99CF /* InstalledController.mm in Sources */,
-				33922C561DFD132B00E9B088 /* DefaultPageOptionsList.m in Sources */,
 				FA6C86E71D76216300FB99CF /* PackageSettingsController.mm in Sources */,
 				FA6C86E11D76200200FB99CF /* ChangesController.mm in Sources */,
 				FA6C86471D74B04F00FB99CF /* CFArray+Sort.mm in Sources */,
@@ -2902,7 +2786,6 @@
 				FA6C865A1D74C0C400FB99CF /* GeneralHelpers.mm in Sources */,
 				FA6C864F1D74BCB300FB99CF /* UIGlobals.mm in Sources */,
 				FA5684BD1DF7318F000A4EBD /* LMXAPTConfig.mm in Sources */,
-				336804AC1E10DD29003E9646 /* LMXSettingsTableViewCell.m in Sources */,
 				FA01D21C1D1B22B100B49E70 /* DiskUsage.cpp in Sources */,
 				FA6C86331D74A97100FB99CF /* NSString+Cydia.mm in Sources */,
 				FA5684C11DF73BCA000A4EBD /* APTManager+Files.m in Sources */,
@@ -2915,7 +2798,6 @@
 				FA6C86831D75797700FB99CF /* Package.mm in Sources */,
 				FA23E2C81D7754A0001FBE4A /* Display.mm in Sources */,
 				FAE6AB591DFCD6F9006F0CAA /* NSString+Paths.m in Sources */,
-				336804991E10D35B003E9646 /* LMXSourceCell.m in Sources */,
 				FA5684B91DF72B3F000A4EBD /* Paths+APT.m in Sources */,
 				FA23E2D71D776C93001FBE4A /* WAKWindow+Hooks.mm in Sources */,
 				FA0311A61D1B2CBD008690CA /* dispatchEvent.mm in Sources */,
@@ -2923,7 +2805,6 @@
 				FA1CAD731DF5CFF400B7766C /* LMXSourceCell.m in Sources */,
 				FA01D21D1D1B22B100B49E70 /* lookup3.c in Sources */,
 				FA23E2CB1D776245001FBE4A /* Device.mm in Sources */,
-				FA0311B61D1B2CDE008690CA /* SDURLCache.m in Sources */,
 				FA6C86B11D75F11100FB99CF /* ProgressController.mm in Sources */,
 				FA6C867C1D7577AA00FB99CF /* CydiaClause.mm in Sources */,
 				FA7DB9021DE0276D00F874E6 /* APTManager.mm in Sources */,
@@ -2964,7 +2845,6 @@
 				FA5684BA1DF72B3F000A4EBD /* Paths+APT.m in Sources */,
 				FAE6429F1DF13EC200E975B8 /* CatalogTableViewController.m in Sources */,
 				FA5684891DF5FA6F000A4EBD /* Platform.m in Sources */,
-				3368049D1E10D89E003E9646 /* FeatureCatalogItem.m in Sources */,
 				FA56848A1DF5FA74000A4EBD /* Device.mm in Sources */,
 				FA5684B51DF60448000A4EBD /* LMXAPTSource+APTLib.mm in Sources */,
 				FAE6429C1DF13EC200E975B8 /* FeatureCatalogAppDelegate.m in Sources */,

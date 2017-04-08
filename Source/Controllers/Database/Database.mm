@@ -198,7 +198,8 @@
         _assert(close(fds[1]) != -1);
         
         [NSThread detachNewThreadSelector:@selector(_readOutput:) toTarget:self withObject:[NSNumber numberWithInt:fds[0]]];
-    } return self;
+    }
+    return self;
 }
 
 - (pkgCacheFile &) cache {
