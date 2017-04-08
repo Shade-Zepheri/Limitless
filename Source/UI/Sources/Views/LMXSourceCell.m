@@ -18,7 +18,7 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style
               reuseIdentifier:(nullable NSString *)reuseIdentifier  {
     self = [super initWithStyle:style
-                 reuseIdentifier:reuseIdentifier];
+                reuseIdentifier:reuseIdentifier];
     
     if (self) {
         

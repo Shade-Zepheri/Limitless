@@ -27,7 +27,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = @"Sources";
-        }
+    }
     return self;
 }
 
@@ -43,8 +43,8 @@
         NSLog(@"error reading sources: %@", error);
     } else {
         NSLog(@"sources: %@", sources);
-        }
     }
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
