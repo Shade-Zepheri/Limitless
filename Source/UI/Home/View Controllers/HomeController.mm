@@ -15,13 +15,14 @@ static void HomeControllerReachabilityCallback(SCNetworkReachabilityRef reachabi
     [(HomeController *) info dispatchEvent:@"CydiaReachabilityCallback"];
 }
 
-- (id) init {
-    if ((self = [super init]) != nil) {
+- (instancetype)init {
+    self = [super init];
+    if (self) {
         [self setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/#!/home/", UI_]]];
         [self reloadData];
         
         reachability_ = SCNetworkReachabilityCreateWithName(kCFAllocatorDefault, "cydia.saurik.com");
-        if (reachability_ != NULL) {
+        if (reachability_) {
             SCNetworkReachabilityContext context = {0, self, NULL, NULL, NULL};
             SCNetworkReachabilitySetCallback(reachability_, HomeControllerReachabilityCallback, &context);
             
@@ -29,45 +30,39 @@ static void HomeControllerReachabilityCallback(SCNetworkReachabilityRef reachabi
             if (SCNetworkReachabilityScheduleWithRunLoop(reachability_, runloop, kCFRunLoopDefaultMode))
                 runloop_ = runloop;
         }
-    } return self;
+    }
+    return self;
 }
 
-- (void) dealloc {
-    if (reachability_ != NULL && runloop_ != NULL)
+- (void)dealloc {
+    if (reachability_ && runloop_) {
         SCNetworkReachabilityUnscheduleFromRunLoop(reachability_, runloop_, kCFRunLoopDefaultMode);
+    }
     [super dealloc];
 }
 
-- (NSURL *) navigationURL {
+- (NSURL *)navigationURL {
     return [NSURL URLWithString:@"cydia://home"];
 }
 
-- (void) aboutButtonClicked {
-    UIAlertView *alert([[[UIAlertView alloc] init] autorelease]);
+- (void)aboutButtonClicked {
+    NSString *message = @"Copyright \u00a9 2008-2015\n"
+    "SaurikIT, LLC\n"
+    "\n"
+    "Jay Freeman (saurik)\n"
+    "saurik@saurik.com\n"
+    "http://www.saurik.com/";
     
-    [alert setTitle:UCLocalize("ABOUT_CYDIA")];
-    [alert addButtonWithTitle:UCLocalize("CLOSE")];
-    [alert setCancelButtonIndex:0];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:UCLocalize("ABOUT_CYDIA") message:message preferredStyle:UIAlertControllerStyleAlert];
     
-    [alert setMessage:
-     @"Copyright \u00a9 2008-2015\n"
-     "SaurikIT, LLC\n"
-     "\n"
-     "Jay Freeman (saurik)\n"
-     "saurik@saurik.com\n"
-     "http://www.saurik.com/"
-     ];
+    UIAlertAction *close = [UIAlertAction actionWithTitle:UCLocalize("CLOSE") style:UIAlertActionStyleCancel handler:nil];
+    [alert addAction:close];
     
-    [alert show];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
-- (UIBarButtonItem *) leftButton {
-    return [[[UIBarButtonItem alloc]
-             initWithTitle:UCLocalize("ABOUT")
-             style:UIBarButtonItemStylePlain
-             target:self
-             action:@selector(aboutButtonClicked)
-             ] autorelease];
+- (UIBarButtonItem *)leftButton {
+    return [[UIBarButtonItem alloc] initWithTitle:UCLocalize("ABOUT") style:UIBarButtonItemStylePlain target:self action:@selector(aboutButtonClicked)];
 }
 
 @end

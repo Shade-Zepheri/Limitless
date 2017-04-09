@@ -96,6 +96,7 @@ struct RadixItem_ {
 - (void) radixSortUsingSelector:(SEL)selector {
     if ([self count] == 0)
         return;
+    
 
     IMP imp(class_getMethodImplementation([[self lastObject] class], selector));
     [self radixSortUsingFunction:reinterpret_cast<MenesRadixSortFunction>(imp) withContext:selector];

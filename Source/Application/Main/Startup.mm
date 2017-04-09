@@ -43,8 +43,6 @@
 
     [self updateExternalKeepAliveStatus:NO];
     [self setUpLegacyGlobals];
-
-
         
     if ([Device isSimulator]) {
         setenv("PATH", "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin", true);
@@ -194,9 +192,9 @@ static const char * CydiaNotifyName = "com.saurik.Cydia.status";
     //NSLog(@"%@", [Languages_ description]);
     
     const char *lang;
-    if (Locale_ != NULL)
+    if (Locale_)
         lang = [(NSString *) CFLocaleGetIdentifier(Locale_) UTF8String];
-    else if (Languages_ != nil && [Languages_ count] != 0)
+    else if (Languages_ && [Languages_ count] != 0)
         lang = [[Languages_ objectAtIndex:0] UTF8String];
     else
         // XXX: consider just setting to C and then falling through?

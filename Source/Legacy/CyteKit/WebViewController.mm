@@ -96,7 +96,7 @@ float CYScrollViewDecelerationRateNormal;
     // XXX: WebThreadCreateNSInvocation returns nil
 
 #if ShowInternals
-    fprintf(stderr, "[%s]R?%s\n", class_getName(self->isa), sel_getName(sel));
+    fprintf(stderr, "[%s]R?%s\n", class_getName(object_getClass(self)), sel_getName(sel));
 #endif
 
     return delegate_ == nil ? NO : [delegate_ respondsToSelector:sel];
@@ -107,7 +107,7 @@ float CYScrollViewDecelerationRateNormal;
         return method;
 
 #if ShowInternals
-    fprintf(stderr, "[%s]S?%s\n", class_getName(self->isa), sel_getName(sel));
+    fprintf(stderr, "[%s]S?%s\n", class_getName(object_getClass(self)), sel_getName(sel));
 #endif
 
     if (delegate_ != nil)
@@ -150,7 +150,7 @@ float CYScrollViewDecelerationRateNormal;
     dlopen("/System/Library/Frameworks/SafariServices.framework/SafariServices", RTLD_GLOBAL | RTLD_LAZY);
     $SFSafariViewController = objc_getClass("SFSafariViewController");
 
-    if (float *_UIScrollViewDecelerationRateNormal = reinterpret_cast<float *>(dlsym(RTLD_DEFAULT, "UIScrollViewDecelerationRateNormal"))) {
+    if (CGFloat *_UIScrollViewDecelerationRateNormal = reinterpret_cast<CGFloat *>(dlsym(RTLD_DEFAULT, "UIScrollViewDecelerationRateNormal"))) {
         CYScrollViewDecelerationRateNormal = *_UIScrollViewDecelerationRateNormal;
     } else {
         CYScrollViewDecelerationRateNormal = 0.998;
