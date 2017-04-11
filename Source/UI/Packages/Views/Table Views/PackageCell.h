@@ -21,7 +21,7 @@ CyteTableViewCellDelegate
     bool summarized_;
 }
 
-- (PackageCell *) init;
+- (PackageCell *)init;
 - (void) setPackage:(Package *)package asSummary:(bool)summary;
 
 - (void) drawContentRect:(CGRect)rect;

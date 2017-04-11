@@ -129,12 +129,14 @@
     return [super setPageColor:nil];
 }
 
-- (id) initWithDatabase:(Database *)database forPackage:(NSString *)name withReferrer:(NSString *)referrer {
-    if ((self = [super init]) != nil) {
+- (instancetype)initWithDatabase:(Database *)database forPackage:(NSString *)name withReferrer:(NSString *)referrer {
+    self = [super init];
+    if (self) {
         database_ = database;
         name_ = name == nil ? @"" : [NSString stringWithString:name];
         [self setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/#!/package/%@", UI_, (id) name_]] withReferrer:referrer];
-    } return self;
+    }
+    return self;
 }
 
 - (void) ensureRequestSchemeMatchesDepictionScheme:(NSString *)scheme {

@@ -21,8 +21,8 @@
     return [NSURL URLWithString:[NSString stringWithFormat:@"cydia://sources/%@", [key_ stringByAddingPercentEscapesIncludingReserved]]];
 }
 
-- (Source *) source {
-    if (key_ == nil)
+- (Source *)source {
+    if (!key_)
         return nil;
     return [database_ sourceWithKey:key_];
 }
@@ -40,7 +40,7 @@
     }
 }
 
-- (void) setEditing:(BOOL)editing animated:(BOOL)animated {
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
     [super setEditing:editing animated:animated];
     
     if (editing)
@@ -51,12 +51,12 @@
     [self updateNavigationItem];
 }
 
-- (void) viewDidAppear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [list_ deselectRowAtIndexPath:[list_ indexPathForSelectedRow] animated:animated];
 }
 
-- (void) viewWillDisappear:(BOOL)animated {
+- (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self setEditing:NO];
 }
@@ -139,14 +139,16 @@
     [super releaseSubviews];
 }
 
-- (id) initWithDatabase:(Database *)database source:(Source *)source {
-    if ((self = [super init]) != nil) {
+- (instancetype)initWithDatabase:(Database *)database source:(Source *)source {
+    self = [super init];
+    if (self) {
         database_ = database;
         key_ = [source key];
-    } return self;
+    }
+    return self;
 }
 
-- (void) reloadData {
+- (void)reloadData {
     [super reloadData];
     
     NSArray *packages = [database_ packages];
@@ -160,7 +162,7 @@
     
     _trace();
     for (Package *package in packages) {
-        if (source != nil && [package source] != source)
+        if (source && [package source] != source)
             continue;
         
         NSString *name([package section]);
@@ -170,7 +172,7 @@
         
         _profile(SectionsView$reloadData$Section)
         section = [sections objectForKey:key];
-        if (section == nil) {
+        if (!section) {
             _profile(SectionsView$reloadData$Section$Allocate)
             section = [[[Section alloc] initWithName:key localize:YES] autorelease];
             [sections setObject:section forKey:key];
@@ -208,7 +210,7 @@
     _trace();
 }
 
-- (void) editButtonClicked {
+- (void)editButtonClicked {
     [self setEditing:![self isEditing] animated:YES];
 }
 

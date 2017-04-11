@@ -112,8 +112,9 @@
     return false;
 }
 
-- (id) initWithDatabase:(Database *)database query:(NSString *)query {
-    if ((self = [super initWithDatabase:database title:UCLocalize("SEARCH")])) {
+- (instancetype)initWithDatabase:(Database *)database query:(NSString *)query {
+    self = [super initWithDatabase:database title:UCLocalize("SEARCH")];
+    if (self) {
         search_ = [[[UISearchBar alloc] init] autorelease];
         [search_ setPlaceholder:UCLocalize("SEARCH_EX")];
         [search_ setDelegate:self];
@@ -135,10 +136,11 @@
         [textField setEnablesReturnKeyAutomatically:NO];
         [[self navigationItem] setTitleView:textField];
         
-        if (query != nil)
+        if (query)
             [search_ setText:query];
         [self useSearch];
-    } return self;
+    }
+    return self;
 }
 
 - (void) viewDidAppear:(BOOL)animated {

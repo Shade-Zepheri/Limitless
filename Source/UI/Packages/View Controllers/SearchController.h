@@ -17,7 +17,7 @@ UISearchBarDelegate
     bool summary_;
 }
 
-- (id) initWithDatabase:(Database *)database query:(NSString *)query;
+- (instancetype)initWithDatabase:(Database *)database query:(NSString *)query;
 - (void) reloadData;
 
 @end

@@ -237,28 +237,36 @@
         return nil;
 }
 
-+ (BOOL) isSelectorExcludedFromWebScript:(SEL)selector {
++ (BOOL)isSelectorExcludedFromWebScript:(SEL)selector {
     return [self webScriptNameForSelector:selector] == nil;
 }
 
-- (BOOL) supports:(NSString *)feature {
+- (BOOL)supports:(NSString *)feature {
     return [feature isEqualToString:@"window.open"];
 }
 
-- (void) unload {
-    [delegate_ performSelectorOnMainThread:@selector(unloadData) withObject:nil waitUntilDone:NO];
+- (void)unload {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [delegate_ unloadData];
+    });
 }
 
-- (void) setScrollAlwaysBounceVertical:(NSNumber *)value {
-    [indirect_ performSelectorOnMainThread:@selector(setScrollAlwaysBounceVerticalNumber:) withObject:value waitUntilDone:NO];
+- (void)setScrollAlwaysBounceVertical:(NSNumber *)value {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [indirect_ setScrollAlwaysBounceVerticalNumber:value];
+    });
 }
 
-- (void) setScrollIndicatorStyle:(NSString *)style {
-    [indirect_ performSelectorOnMainThread:@selector(setScrollIndicatorStyleWithName:) withObject:style waitUntilDone:NO];
+- (void)setScrollIndicatorStyle:(NSString *)style {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [indirect_ setScrollIndicatorStyleWithName:style];
+    });
 }
 
-- (void) addInternalRedirect:(NSString *)from :(NSString *)to {
-    [CydiaWebViewController performSelectorOnMainThread:@selector(addDiversion:) withObject:[[[Diversion alloc] initWithFrom:from to:to] autorelease] waitUntilDone:NO];
+- (void)addInternalRedirect:(NSString *)from :(NSString *)to {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [CydiaWebViewController addDiversion:[[[Diversion alloc] initWithFrom:from to:to] autorelease]];
+    });
 }
 
 - (NSDictionary *) getApplicationInfo:(NSString *)display value:(NSString *)key {
@@ -396,8 +404,10 @@
 
 - (void) popViewController:(NSNumber *)value {
     if (value == (id) [WebUndefined undefined])
-        value = [NSNumber numberWithBool:YES];
-    [indirect_ performSelectorOnMainThread:@selector(popViewControllerWithNumber:) withObject:value waitUntilDone:NO];
+        value = @YES;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [indirect_ popViewControllerWithNumber:value];
+    });
 }
 
 - (void) addSource:(NSString *)href :(NSString *)distribution :(WebScriptObject *)sections {
@@ -406,28 +416,32 @@
     for (NSString *section in sections)
         [array addObject:section];
     
-    [delegate_ performSelectorOnMainThread:@selector(addSource:) withObject:[NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                                                             @"deb", @"Type",
-                                                                             href, @"URI",
-                                                                             distribution, @"Distribution",
-                                                                             array, @"Sections",
-                                                                             nil] waitUntilDone:NO];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [delegate_ addSource:@{@"Type": @"deb", @"URI": href, @"Distribution": distribution, @"Sections": array}];
+    });
 }
 
-- (BOOL) addTrivialSource:(NSString *)href {
+- (BOOL)addTrivialSource:(NSString *)href {
     href = VerifySource(href);
-    if (href == nil)
+    if (!href) {
         return NO;
-    [delegate_ performSelectorOnMainThread:@selector(addTrivialSource:) withObject:href waitUntilDone:NO];
+    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [delegate_ addTrivialSource:href];
+    });
     return YES;
 }
 
-- (void) refreshSources {
-    [delegate_ performSelectorOnMainThread:@selector(syncData) withObject:nil waitUntilDone:NO];
+- (void)refreshSources {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [delegate_ syncData];
+    });
 }
 
-- (void) saveConfig {
-    [delegate_ performSelectorOnMainThread:@selector(_saveConfig) withObject:nil waitUntilDone:NO];
+- (void)saveConfig {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [delegate_ _saveConfig];
+    });
 }
 
 - (NSArray *) getAllSources {
@@ -495,16 +509,20 @@
     return value;
 }
 
-- (void) close {
-    [indirect_ performSelectorOnMainThread:@selector(close) withObject:nil waitUntilDone:NO];
+- (void)close {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [indirect_ close];
+    });
 }
 
 - (NSNumber *) isReachable:(NSString *)name {
     return [NSNumber numberWithBool:IsReachable([name UTF8String])];
 }
 
-- (void) installPackages:(NSArray *)packages {
-    [delegate_ performSelectorOnMainThread:@selector(installPackages:) withObject:packages waitUntilDone:NO];
+- (void)installPackages:(NSArray *)packages {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [delegate_ installPackages:packages];
+    });
 }
 
 - (NSString *) substitutePackageNames:(NSString *)message {
@@ -530,11 +548,13 @@
     [indirect_ setButtonTitle:button withStyle:style toFunction:function];
 }
 
-- (void) setBadgeValue:(id)value {
-    [indirect_ performSelectorOnMainThread:@selector(setBadgeValue:) withObject:value waitUntilDone:NO];
+- (void)setBadgeValue:(id)value {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [indirect_ setBadgeValue:value];
+    });
 }
 
-- (void) setAllowsNavigationAction:(NSString *)value {
+- (void)setAllowsNavigationAction:(NSString *)value {
     [indirect_ performSelectorOnMainThread:@selector(setAllowsNavigationActionByNumber:) withObject:value waitUntilDone:NO];
 }
 
@@ -550,10 +570,13 @@
     [indirect_ performSelectorOnMainThread:@selector(setNavigationBarStyle:) withObject:value waitUntilDone:NO];
 }
 
-- (void) setNavigationBarTintRed:(NSNumber *)red green:(NSNumber *)green blue:(NSNumber *)blue alpha:(NSNumber *)alpha {
+- (void)setNavigationBarTintRed:(NSNumber *)red green:(NSNumber *)green blue:(NSNumber *)blue alpha:(NSNumber *)alpha {
     float opacity(alpha == (id) [WebUndefined undefined] ? 1 : [alpha floatValue]);
     UIColor *color([UIColor colorWithRed:[red floatValue] green:[green floatValue] blue:[blue floatValue] alpha:opacity]);
-    [indirect_ performSelectorOnMainThread:@selector(setNavigationBarTintColor:) withObject:color waitUntilDone:NO];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [indirect_ setNavigationBarTintColor:color];
+    });
 }
 
 - (void) setPasteboardString:(NSString *)value {
@@ -568,8 +591,10 @@
     // XXX: the website expects this :/
 }
 
-- (void) scrollToBottom:(NSNumber *)animated {
-    [indirect_ performSelectorOnMainThread:@selector(scrollToBottomAnimated:) withObject:animated waitUntilDone:NO];
+- (void)scrollToBottom:(NSNumber *)animated {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [indirect_ scrollToBottomAnimated:animated];
+    });
 }
 
 - (void) setViewportWidth:(float)width {

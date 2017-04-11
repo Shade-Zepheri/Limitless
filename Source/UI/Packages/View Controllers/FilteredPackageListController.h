@@ -16,7 +16,7 @@ typedef Function<void, NSMutableArray *> PackageSorter;
     PackageSorter sorter_;
 }
 
-- (id)initWithDatabase:(Database *)database title:(NSString *)title filter:(PackageFilter)filter;
+- (instancetype)initWithDatabase:(Database *)database title:(NSString *)title filter:(PackageFilter)filter;
 
 - (void)setFilter:(PackageFilter)filter;
 - (void)setSorter:(PackageSorter)sorter;

@@ -51,10 +51,12 @@
     }
 }
 
-- (id)initWithDatabase:(Database *)database title:(NSString *)title filter:(PackageFilter)filter {
-    if ((self = [super initWithDatabase:database title:title]) != nil) {
+- (instancetype)initWithDatabase:(Database *)database title:(NSString *)title filter:(PackageFilter)filter {
+    self = [super initWithDatabase:database title:title];
+    if (self) {
         [self setFilter:filter];
-    } return self;
+    }
+    return self;
 }
 
 @end

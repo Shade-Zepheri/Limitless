@@ -15,11 +15,8 @@
 
 // MARK: - Init
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style
-              reuseIdentifier:(nullable NSString *)reuseIdentifier  {
-    self = [super initWithStyle:style
-                reuseIdentifier:reuseIdentifier];
-    
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(nullable NSString *)reuseIdentifier  {
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
     }

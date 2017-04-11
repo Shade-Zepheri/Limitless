@@ -59,8 +59,10 @@ bool DepSubstrate(const pkgCache::VerIterator &iterator) {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (id) invokeDefaultMethodWithArguments:(NSArray *)args {
-    [self performSelectorOnMainThread:@selector(_doContinue) withObject:nil waitUntilDone:NO];
+- (id)invokeDefaultMethodWithArguments:(NSArray *)args {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self _doContinue];
+    });
     return nil;
 }
 

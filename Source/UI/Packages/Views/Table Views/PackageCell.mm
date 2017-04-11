@@ -12,8 +12,9 @@
 
 @implementation PackageCell
 
-- (PackageCell *) init {
-	if ((self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Package"]) != nil) {
+- (PackageCell *)init {
+    self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Packages"];
+	if (self) {
         UIView *content([self contentView]);
         CGRect bounds([content bounds]);
         
@@ -23,7 +24,8 @@
         
         [content_ setDelegate:self];
         [content_ setOpaque:YES];
-    } return self;
+    }
+    return self;
 }
 
 - (NSString *) accessibilityLabel {

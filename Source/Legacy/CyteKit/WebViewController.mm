@@ -278,7 +278,9 @@ float CYScrollViewDecelerationRateNormal;
     style_ = style;
     function_ = function;
 
-    [self performSelectorOnMainThread:@selector(applyRightButton) withObject:nil waitUntilDone:NO];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self applyRightButton];
+    });
 }
 
 - (void) setButtonTitle:(NSString *)button withStyle:(NSString *)style toFunction:(id)function {
@@ -286,12 +288,16 @@ float CYScrollViewDecelerationRateNormal;
     style_ = style;
     function_ = function;
 
-    [self performSelectorOnMainThread:@selector(applyRightButton) withObject:nil waitUntilDone:NO];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self applyRightButton];
+    });
 }
 
 - (void) removeButton {
     custom_ = [NSNull null];
-    [self performSelectorOnMainThread:@selector(applyRightButton) withObject:nil waitUntilDone:NO];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self applyRightButton];
+    });
 }
 
 - (void) scrollToBottomAnimated:(NSNumber *)animated {
@@ -314,12 +320,14 @@ float CYScrollViewDecelerationRateNormal;
     [self _setViewportWidth];
 }
 
-- (void) _setViewportWidthOnMainThread:(NSNumber *)width {
+- (void)_setViewportWidthOnMainThread:(NSNumber *)width {
     [self setViewportWidth:[width floatValue]];
 }
 
-- (void) setViewportWidthOnMainThread:(float)width {
-    [self performSelectorOnMainThread:@selector(_setViewportWidthOnMainThread:) withObject:[NSNumber numberWithFloat:width] waitUntilDone:NO];
+- (void)setViewportWidthOnMainThread:(float)width {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self _setViewportWidthOnMainThread:[NSNumber numberWithFloat:width]];
+    });
 }
 
 - (void) webViewUpdateViewSettings:(UIWebView *)view {

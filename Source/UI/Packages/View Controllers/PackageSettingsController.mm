@@ -141,11 +141,13 @@
     [super releaseSubviews];
 }
 
-- (id) initWithDatabase:(Database *)database package:(NSString *)package {
-    if ((self = [super init]) != nil) {
+- (instancetype)initWithDatabase:(Database *)database package:(NSString *)package {
+    self = [super init];
+    if (self) {
         database_ = database;
         name_ = package;
-    } return self;
+    }
+    return self;
 }
 
 - (void) reloadData {

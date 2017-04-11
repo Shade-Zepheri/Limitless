@@ -31,19 +31,16 @@ static NSString * const kSourceCellIdentifier = @"SourceCellIdentifier";
 // MARK: - Configure Table
 
 - (void)configureTableWithCellIdentifiers:(UITableView *)tableView {
-    [tableView registerClass:[LMXSourceCell class]
-      forCellReuseIdentifier:kSourceCellIdentifier];
+    [tableView registerClass:[LMXSourceCell class] forCellReuseIdentifier:kSourceCellIdentifier];
 }
 
 // MARK: - Table Data Source
 
-- (NSInteger)tableView:(UITableView *)tableView
- numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 0;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     return nil;
 }
 

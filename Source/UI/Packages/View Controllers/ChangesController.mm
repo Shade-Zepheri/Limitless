@@ -13,15 +13,15 @@
 
 @implementation ChangesController
 
-- (NSURL *) referrerURL {
+- (NSURL *)referrerURL {
     return [NSURL URLWithString:[NSString stringWithFormat:@"%@/#!/changes/", UI_]];
 }
 
-- (NSURL *) navigationURL {
+- (NSURL *)navigationURL {
     return [NSURL URLWithString:@"cydia://changes"];
 }
 
-- (Package *) packageAtIndexPath:(NSIndexPath *)path {
+- (Package *)packageAtIndexPath:(NSIndexPath *)path {
     @synchronized (database_) {
         if ([database_ era] != era_)
             return nil;
@@ -32,9 +32,10 @@
         Section *section([sections_ objectAtIndex:sectionIndex]);
         NSInteger row([path row]);
         return [[[packages_ objectAtIndex:([section row] + row)] retain] autorelease];
-    } }
+    }
+}
 
-- (void) alertView:(UIAlertView *)alert clickedButtonAtIndex:(NSInteger)button {
+- (void)alertView:(UIAlertView *)alert clickedButtonAtIndex:(NSInteger)button {
     NSString *context([alert context]);
     
     if ([context isEqualToString:@"norefresh"])
@@ -58,7 +59,7 @@
                                                       ] autorelease] animated:YES];
 }
 
-- (void) refreshButtonClicked {
+- (void)refreshButtonClicked {
     if ([delegate_ requestUpdate])
         [self setLeftBarButtonItem];
 }
@@ -91,13 +92,15 @@
         }];
     } }
 
-- (id) initWithDatabase:(Database *)database {
-    if ((self = [super initWithDatabase:database title:UCLocalize("CHANGES")]) != nil) {
+- (instancetype)initWithDatabase:(Database *)database {
+    self = [super initWithDatabase:database title:UCLocalize("CHANGES")];
+    if (self) {
         [self useFilter];
-    } return self;
+    }
+    return self;
 }
 
-- (void) viewDidLoad {
+- (void)viewDidLoad {
     [super viewDidLoad];
     [self setLeftBarButtonItem];
 }

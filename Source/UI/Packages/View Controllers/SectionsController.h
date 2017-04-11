@@ -21,7 +21,7 @@ UITableViewDelegate
     _H<UITableView, 2> list_;
 }
 
-- (id) initWithDatabase:(Database *)database source:(Source *)source;
-- (void) editButtonClicked;
+- (instancetype)initWithDatabase:(Database *)database source:(Source *)source;
+- (void)editButtonClicked;
 
 @end

@@ -130,42 +130,42 @@
 	return YES;
 }
 
-- (void) applicationWillSuspend {
+- (void)applicationWillSuspend {
     [database_ clean];
     [super applicationWillSuspend];
 }
 
-- (void) suspendReturningToLastApp:(BOOL)returning {
+- (void)suspendReturningToLastApp:(BOOL)returning {
     if ([self isSafeToSuspend])
         [super suspendReturningToLastApp:returning];
 }
 
-- (void) suspend {
+- (void)suspend {
     if ([self isSafeToSuspend])
         [super suspend];
 }
 
-- (void) applicationSuspend {
+- (void)applicationSuspend {
     if ([self isSafeToSuspend])
         [super applicationSuspend];
 }
 
-- (void) applicationSuspend:(__GSEvent *)event {
+- (void)applicationSuspend:(__GSEvent *)event {
     if ([self isSafeToSuspend])
         [super applicationSuspend:event];
 }
 
-- (void) _animateSuspension:(BOOL)arg0 duration:(double)arg1 startTime:(double)arg2 scale:(float)arg3 {
+- (void)_animateSuspension:(BOOL)arg0 duration:(double)arg1 startTime:(double)arg2 scale:(float)arg3 {
     if ([self isSafeToSuspend])
         [super _animateSuspension:arg0 duration:arg1 startTime:arg2 scale:arg3];
 }
 
-- (void) _setSuspended:(BOOL)value {
+- (void)_setSuspended:(BOOL)value {
     if ([self isSafeToSuspend])
         [super _setSuspended:value];
 }
 
-- (void) applicationWillResignActive:(UIApplication *)application {
+- (void)applicationWillResignActive:(UIApplication *)application {
     // Stop refreshing if you get a phone call or lock the device.
     if ([tabbar_ updating])
         [tabbar_ cancelUpdate];
@@ -175,18 +175,18 @@
 }
 
 
-- (void) applicationWillTerminate:(UIApplication *)application {
+- (void)applicationWillTerminate:(UIApplication *)application {
     [self saveState];
 }
 
-- (void) applicationDidEnterBackground:(UIApplication *)application {
+- (void)applicationDidEnterBackground:(UIApplication *)application {
     if (kCFCoreFoundationVersionNumber < 1000 && [self isSafeToSuspend])
         return [self terminateWithSuccess];
     Backgrounded_ = [NSDate date];
     [self saveState];
 }
 
-- (void) applicationWillEnterForeground:(UIApplication *)application {
+- (void)applicationWillEnterForeground:(UIApplication *)application {
     if (!Backgrounded_)
         return;
     
@@ -210,7 +210,7 @@
 
 #pragma mark - State
 
-- (void) saveState {
+- (void)saveState {
     NSString *savedStatePath = [Paths.aptCache subpath:@"SavedState.plist"];
     
     [[NSDictionary dictionaryWithObjectsAndKeys:
@@ -224,7 +224,7 @@
 
 
 
-- (BOOL) isSafeToSuspend {
+- (BOOL)isSafeToSuspend {
     if (locked_ != 0) {
 #if !ForRelease
         NSLog(@"isSafeToSuspend: locked_ != 0");
@@ -464,14 +464,15 @@ errno == ENOTDIR \
 
 #pragma mark - Database Delegate
 
-- (void) repairWithSelector:(SEL)selector {
+- (void)repairWithSelector:(SEL)selector {
     NSInvocation *invocation = [NSInvocation invocationWithSelector:selector
                                                           forTarget:database_];
-    [self performSelectorOnMainThread:@selector(repairWithInvocation:)
-                           withObject:invocation waitUntilDone:YES];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self repairWithInvocation:invocation];
+    });
 }
 
-- (void) repairWithInvocation:(NSInvocation *)invocation {
+- (void)repairWithInvocation:(NSInvocation *)invocation {
     _trace();
     [self invokeNewProgress:invocation
               forController:nil
@@ -479,7 +480,7 @@ errno == ENOTDIR \
     _trace();
 }
 
-- (void) setConfigurationData:(NSString *)data {
+- (void)setConfigurationData:(NSString *)data {
     static RegEx conffile_r("'(.*)' '(.*)' ([01]) ([01])");
     
     if (!conffile_r(data)) {
@@ -652,9 +653,9 @@ errno == ENOTDIR \
 
 
 - (void) refreshIfPossible {
-    [NSThread detachNewThreadSelector:@selector(_refreshIfPossible)
-                             toTarget:self
-                           withObject:nil];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self _refreshIfPossible];
+    });
 }
 
 - (void) _refreshIfPossible {
@@ -663,7 +664,7 @@ errno == ENOTDIR \
         NSDate *update([[NSDictionary dictionaryWithContentsOfFile:cacheStatePath] objectForKey:@"LastUpdate"]);
         
         bool recently = false;
-        if (update != nil) {
+        if (update) {
             NSTimeInterval interval([update timeIntervalSinceNow]);
             if (interval > -(15*60))
                 recently = true;
@@ -678,12 +679,16 @@ errno == ENOTDIR \
             // If we are cancelling, we need to make sure it knows it's already loaded.
             loaded_ = true;
             
-            [self performSelectorOnMainThread:@selector(_loaded) withObject:nil waitUntilDone:NO];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self _loaded];
+            });
         } else {
             // We are going to load, so remember that.
             loaded_ = true;
             
-            [tabbar_ performSelectorOnMainThread:@selector(beginUpdate) withObject:nil waitUntilDone:NO];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [tabbar_ beginUpdate];
+            });
         }
     }
 }
@@ -697,7 +702,7 @@ errno == ENOTDIR \
                                                                         delegate:self]
                                     autorelease];
     
-    if (navigation != nil) {
+    if (navigation) {
         [navigation pushViewController:progress animated:YES];
     } else {
         [self presentModalViewController:progress force:YES];
@@ -717,11 +722,10 @@ errno == ENOTDIR \
                   withTitle:title];
 }
 
-- (void) addProgressEventOnMainThread:(CydiaProgressEvent *)event
-                              forTask:(NSString *)task {
-    [self performSelectorOnMainThread:@selector(addProgressEventForTask:)
-                           withObject:@[event, task]
-                        waitUntilDone:YES];
+- (void)addProgressEventOnMainThread:(CydiaProgressEvent *)event forTask:(NSString *)task {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self addProgressEventForTask:@[event, task]];
+    });
 }
 
 - (void) addProgressEventForTask:(NSArray *)data {
@@ -1019,13 +1023,16 @@ errno == ENOTDIR \
 
 - (void) reloadData {
     [self reloadDataWithInvocation:nil];
-    if ([database_ progressDelegate] == nil)
+    if (![database_ progressDelegate]) {
         [self _loaded];
+    }
 }
 
 - (void) update_ {
     [database_ update];
-    [self performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self reloadData];
+    });
 }
 
 - (void) syncData {
@@ -1082,7 +1089,7 @@ errno == ENOTDIR \
     }
 }
 
-- (void) perform_ {
+- (void)perform_ {
     [database_ perform];
     [self performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
     [self performSelectorOnMainThread:@selector(uicache) withObject:nil waitUntilDone:YES];
@@ -1200,7 +1207,7 @@ errno == ENOTDIR \
 
 #pragma mark - Network Activity
 
-- (void) retainNetworkActivityIndicator {
+- (void)retainNetworkActivityIndicator {
     if (activity_++ == 0)
         [self setNetworkActivityIndicatorVisible:YES];
     
@@ -1209,7 +1216,7 @@ errno == ENOTDIR \
 #endif
 }
 
-- (void) releaseNetworkActivityIndicator {
+- (void)releaseNetworkActivityIndicator {
     if (--activity_ == 0)
         [self setNetworkActivityIndicatorVisible:NO];
     
@@ -1353,9 +1360,11 @@ errno == ENOTDIR \
         [[NSNotificationCenter defaultCenter] postNotificationName:@"UIApplicationDidReceiveMemoryWarningNotification" object:[UIApplication sharedApplication]];
 }
 
-- (void) _sendMemoryWarningNotifications {
+- (void)_sendMemoryWarningNotifications {
     while (true) {
-        [self performSelectorOnMainThread:@selector(_sendMemoryWarningNotification) withObject:nil waitUntilDone:NO];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self _sendMemoryWarningNotification];
+        });
         sleep(2);
         //usleep(2000000);
     }

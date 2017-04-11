@@ -85,11 +85,17 @@
             } else if (strncmp(line, "status: ", 8) == 0) {
                 // status: <package>: {unpacked,half-configured,installed}
                 CydiaProgressEvent *event([CydiaProgressEvent eventWithMessage:[NSString stringWithUTF8String:(line + 8)] ofType:kCydiaProgressEventTypeStatus]);
-                [progress_ performSelectorOnMainThread:@selector(addProgressEvent:) withObject:event waitUntilDone:YES];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [progress_ addProgressEvent:event];
+                });
             } else if (strncmp(line, "processing: ", 12) == 0) {
                 // processing: configure: config-test
                 CydiaProgressEvent *event([CydiaProgressEvent eventWithMessage:[NSString stringWithUTF8String:(line + 12)] ofType:kCydiaProgressEventTypeStatus]);
-                [progress_ performSelectorOnMainThread:@selector(addProgressEvent:) withObject:event waitUntilDone:YES];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [progress_ addProgressEvent:event];
+                });
             } else if (pmstatus_r(line, size)) {
                 std::string type([pmstatus_r[1] UTF8String]);
                 
@@ -98,22 +104,33 @@
                     package = nil;
                 
                 float percent([pmstatus_r[3] floatValue]);
-                [progress_ performSelectorOnMainThread:@selector(setProgressPercent:) withObject:[NSNumber numberWithFloat:(percent / 100)] waitUntilDone:YES];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [progress_ setProgressPercent:[NSNumber numberWithFloat:(percent / 100)]];
+                });
                 
                 NSString *string = pmstatus_r[4];
                 
                 if (type == "pmerror") {
                     CydiaProgressEvent *event([CydiaProgressEvent eventWithMessage:string ofType:kCydiaProgressEventTypeError forPackage:package]);
-                    [progress_ performSelectorOnMainThread:@selector(addProgressEvent:) withObject:event waitUntilDone:YES];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [progress_ addProgressEvent:event];
+                    });
                 } else if (type == "pmstatus") {
                     CydiaProgressEvent *event([CydiaProgressEvent eventWithMessage:string ofType:kCydiaProgressEventTypeStatus forPackage:package]);
-                    [progress_ performSelectorOnMainThread:@selector(addProgressEvent:) withObject:event waitUntilDone:YES];
-                } else if (type == "pmconffile")
-                    [delegate_ performSelectorOnMainThread:@selector(setConfigurationData:) withObject:string waitUntilDone:YES];
-                else
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [progress_ addProgressEvent:event];
+                    });
+                } else if (type == "pmconffile") {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [delegate_ setConfigurationData:string];
+                    });
+                } else {
                     lprintf("E:unknown pmstatus\n");
-            } else
+                }
+            } else {
                 lprintf("E:unknown status\n");
+            }
         }
     }
     
@@ -129,7 +146,9 @@
             lprintf("O:%s\n", line);
             
             CydiaProgressEvent *event([CydiaProgressEvent eventWithMessage:[NSString stringWithUTF8String:line] ofType:kCydiaProgressEventTypeInformation]);
-            [progress_ performSelectorOnMainThread:@selector(addProgressEvent:) withObject:event waitUntilDone:YES];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [progress_ addProgressEvent:event];
+            });
         }
     }
     
@@ -493,7 +512,8 @@
             for (size_t index(0); index != count; ++index)
                 [(Package *) CFArrayGetValueAtIndex(packages_, index) setIndex:index];
         }
-    } }
+    }
+}
 
 - (void) clear {
     @synchronized (self) {
@@ -505,7 +525,8 @@
                 cache_->MarkKeep(iterator, false);
             else if ((cache_[iterator].iFlags & pkgDepCache::ReInstall) != 0)
                 cache_->SetReInstall(iterator, false);
-    } }
+    }
+}
 
 - (void) configure {
     _trace();
@@ -576,7 +597,10 @@
             [before addObject:[NSString stringWithUTF8String:(*source)->GetURI().c_str()]];
     }
     
-    [delegate_ performSelectorOnMainThread:@selector(retainNetworkActivityIndicator) withObject:nil waitUntilDone:YES];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [delegate_ retainNetworkActivityIndicator];
+    });
+    
     
     if (fetcher_->Run(PulseInterval_) != pkgAcquire::Continue) {
         _trace();
@@ -601,7 +625,9 @@
         [delegate_ addProgressEventOnMainThread:event forTask:title];
     }
     
-    [delegate_ performSelectorOnMainThread:@selector(releaseNetworkActivityIndicator) withObject:nil waitUntilDone:YES];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [delegate_ releaseNetworkActivityIndicator];
+    });
     
     if (failed) {
         _trace();
@@ -686,9 +712,9 @@
     if ([self popErrorWithTitle:title])
         return;
     
-    [delegate_
-     performSelectorOnMainThread:@selector(retainNetworkActivityIndicator)
-     withObject:nil waitUntilDone:YES];    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [delegate_ retainNetworkActivityIndicator];
+    });
     
     bool success(ListUpdate(status, list, PulseInterval_));
     if (status.WasCancelled())
@@ -702,8 +728,9 @@
           nil] writeToFile:cacheStatePath atomically:YES];
     }
     
-    [delegate_ performSelectorOnMainThread:@selector(releaseNetworkActivityIndicator)
-                                withObject:nil waitUntilDone:YES];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [delegate_ releaseNetworkActivityIndicator];
+    });
 }
 
 - (void) setDelegate:(NSObject<DatabaseDelegate> *)delegate {

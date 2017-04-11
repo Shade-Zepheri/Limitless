@@ -211,16 +211,18 @@
     [list_ setRowHeight:([self isSummarized] ? 38 : 73)];
 }
 
-- (id) initWithDatabase:(Database *)database title:(NSString *)title {
-    if ((self = [super init]) != nil) {
+- (instancetype)initWithDatabase:(Database *)database title:(NSString *)title {
+    self = [super init];
+    if (self) {
         database_ = database;
         title_ = [title copy];
         [[self navigationItem] setTitle:title_];
-    } return self;
+    }
+    return self;
 }
 
-- (void) loadView {
-    UIView *view([[[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]] autorelease]);
+- (void)loadView {
+    UIView *view([[[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds] autorelease]);
     [view setAutoresizingMask:(UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight)];
     [self setView:view];
     
@@ -237,7 +239,7 @@
     [self updateHeight];
 }
 
-- (void) releaseSubviews {
+- (void)releaseSubviews {
     list_ = nil;
     
     packages_ = nil;

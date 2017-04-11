@@ -22,8 +22,6 @@
     _H<NSArray> versions_;
 }
 
-- (id) initWithDatabase:(Database *)database
-             forPackage:(NSString *)name
-           withReferrer:(NSString *)referrer;
+- (instancetype)initWithDatabase:(Database *)database forPackage:(NSString *)name withReferrer:(NSString *)referrer;
 
 @end

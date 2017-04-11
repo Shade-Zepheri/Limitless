@@ -10,7 +10,7 @@
 
 @implementation SectionController
 
-- (NSURL *) referrerURL {
+- (NSURL *)referrerURL {
     NSString *name(section_);
     name = name ?: @"*";
     NSString *key(key_);
@@ -18,7 +18,7 @@
     return [NSURL URLWithString:[NSString stringWithFormat:@"%@/#!/sections/%@/%@", UI_, [key stringByAddingPercentEscapesIncludingReserved], [name stringByAddingPercentEscapesIncludingReserved]]];
 }
 
-- (NSURL *) navigationURL {
+- (NSURL *)navigationURL {
     NSString *name(section_);
     name = name ?: @"*";
     NSString *key(key_);
@@ -26,22 +26,24 @@
     return [NSURL URLWithString:[NSString stringWithFormat:@"cydia://sections/%@/%@", [key stringByAddingPercentEscapesIncludingReserved], [name stringByAddingPercentEscapesIncludingReserved]]];
 }
 
-- (id) initWithDatabase:(Database *)database source:(Source *)source section:(NSString *)section {
+- (instancetype)initWithDatabase:(Database *)database source:(Source *)source section:(NSString *)section {
     NSString *title;
-    if (section == nil)
+    if (!section) {
         title = UCLocalize("ALL_PACKAGES");
-    else if (![section isEqual:@""])
+    } else if (![section isEqual:@""]) {
         title = [[NSBundle mainBundle] localizedStringForKey:Simplify(section) value:nil table:@"Sections"];
-    else
+    } else {
         title = UCLocalize("NO_SECTION");
+    }
     
-    if ((self = [super initWithDatabase:database title:title]) != nil) {
+    self = [super initWithDatabase:database title:title];
+    if (self) {
         key_ = [source key];
         section_ = section;
     } return self;
 }
 
-- (void) reloadData {
+- (void)reloadData {
     Source *source([database_ sourceWithKey:key_]);
     _H<NSString> name(section_);
     

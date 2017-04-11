@@ -25,7 +25,7 @@
 }
 @property (nonatomic, strong) id previewingContext;
 
-- (id)initWithDatabase:(Database *)database title:(NSString *)title;
+- (instancetype)initWithDatabase:(Database *)database title:(NSString *)title;
 - (void)setDelegate:(id)delegate;
 - (void)resetCursor;
 - (void)clearData;

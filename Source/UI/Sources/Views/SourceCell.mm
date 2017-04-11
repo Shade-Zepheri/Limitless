@@ -12,8 +12,9 @@
 
 @implementation SourceCell
 
-- (id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) != nil) {
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
         UIView *content([self contentView]);
         CGRect bounds([content bounds]);
         
@@ -35,7 +36,8 @@
         [content addSubview:indicator_];
         
         [[content_ layer] setContentsGravity:kCAGravityTopLeft];
-    } return self;
+    }
+    return self;
 }
 
 
@@ -58,8 +60,11 @@
                             returningResponse:NULL
                             error:NULL
                             ])
-            if (UIImage *image = [UIImage imageWithData:data])
-                [self performSelectorOnMainThread:@selector(_setImage:) withObject:[NSArray arrayWithObjects:url, image, nil] waitUntilDone:NO];
+            if (UIImage *image = [UIImage imageWithData:data]) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self _setImage:@[url, image]];
+                });
+            }
     }
 }
 
@@ -77,7 +82,10 @@
     [content_ setNeedsDisplay];
     
     url_ = [source iconURL];
-    [NSThread detachNewThreadSelector:@selector(_setSource:) toTarget:self withObject:url_];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self _setSource:url_];
+    });
 }
 
 - (void) setAllSource {

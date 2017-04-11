@@ -27,8 +27,9 @@
     return items;
 }
 
-- (id) initWithDatabase:(Database *)database {
-    if ((self = [super init]) != nil) {
+- (instancetype)initWithDatabase:(Database *)database {
+    self = [super init];
+    if (self) {
         database_ = database;
         [self setDelegate:self];
         
@@ -36,7 +37,8 @@
         [indicator_ setOrigin:CGPointMake(kCFCoreFoundationVersionNumber >= 800 ? 2 : 4, 2)];
         
         [[self view] setAutoresizingMask:UIViewAutoresizingFlexibleBoth];
-    } return self;
+    }
+    return self;
 }
 
 - (void) beginUpdate {
@@ -55,11 +57,9 @@
     [updatedelegate_ retainNetworkActivityIndicator];
     updating_ = true;
     
-    [NSThread
-     detachNewThreadSelector:@selector(performUpdate)
-     toTarget:self
-     withObject:nil
-     ];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self performUpdate];
+    });
 }
 
 - (void) performUpdate {
@@ -67,11 +67,9 @@
         SourceStatus status(self, database_);
         [database_ updateWithStatus:status];
         
-        [self
-         performSelectorOnMainThread:@selector(completeUpdate)
-         withObject:nil
-         waitUntilDone:NO
-         ];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self completeUpdate];
+        });
     }
 }
 

@@ -23,10 +23,10 @@
 
 @implementation NSInvocation (MenesInvocationWithSelector)
 
-+ (NSInvocation *) invocationWithSelector:(SEL)selector forTarget:(id)target {
-    NSInvocation *invocation([NSInvocation invocationWithMethodSignature:[target methodSignatureForSelector:selector]]);
-    [invocation setTarget:target];
-    [invocation setSelector:selector];
++ (NSInvocation *)invocationWithSelector:(SEL)selector forTarget:(id)target {
+    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[target methodSignatureForSelector:selector]];
+    invocation.target = target;
+    invocation.selector = selector;
     return invocation;
 }
 

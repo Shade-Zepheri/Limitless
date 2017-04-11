@@ -21,7 +21,7 @@
     _transient NSObject<CydiaDelegate> *updatedelegate_;
 }
 
-- (id) initWithDatabase:(Database *)database;
+- (instancetype)initWithDatabase:(Database *)database;
 
 - (NSArray *) navigationURLCollection;
 - (void) beginUpdate;

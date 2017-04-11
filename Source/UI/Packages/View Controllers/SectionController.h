@@ -14,6 +14,6 @@
     _H<NSString> section_;
 }
 
-- (id) initWithDatabase:(Database *)database source:(Source *)source section:(NSString *)section;
+- (instancetype)initWithDatabase:(Database *)database source:(Source *)source section:(NSString *)section;
 
 @end

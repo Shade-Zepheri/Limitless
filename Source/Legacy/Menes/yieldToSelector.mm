@@ -42,30 +42,24 @@
         
         stopped = true;
         
-        [self
-         performSelectorOnMainThread:@selector(doNothing)
-         withObject:nil
-         waitUntilDone:NO
-         ];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self doNothing];
+        });
     }
 }
 
 - (id) yieldToSelector:(SEL)selector withObject:(id)object {
     volatile bool stopped(false);
 
-    NSMutableArray *context([NSMutableArray arrayWithObjects:
+    NSMutableArray *context = [NSMutableArray arrayWithObjects:
         [NSValue valueWithPointer:selector],
         [NSValue valueWithNonretainedObject:object],
         [NSValue valueWithPointer:const_cast<bool *>(&stopped)],
-    nil]);
-
-    NSThread *thread([[[NSThread alloc]
-        initWithTarget:self
-        selector:@selector(_yieldToContext:)
-        object:context
-    ] autorelease]);
-
-    [thread start];
+    nil];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self _yieldToContext:context];
+    });
 
     NSRunLoop *loop([NSRunLoop currentRunLoop]);
     NSDate *future([NSDate distantFuture]);
@@ -76,7 +70,7 @@
     return [context count] == 0 ? nil : [context objectAtIndex:0];
 }
 
-- (id) yieldToSelector:(SEL)selector {
+- (id)yieldToSelector:(SEL)selector {
     return [self yieldToSelector:selector withObject:nil];
 }
 

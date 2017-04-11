@@ -201,11 +201,11 @@
 }
 
 - (NSArray *) sections {
-    return record_ == nil ? (id) [NSNull null] : [record_ objectForKey:@"Sections"] ?: [NSArray array];
+    return !record_ ? (id) [NSNull null] : [record_ objectForKey:@"Sections"] ?: [NSArray array];
 }
 
 - (void) _addSection:(NSString *)section {
-    if (record_ == nil)
+    if (!record_)
         return;
     else if (NSMutableArray *sections = [record_ objectForKey:@"Sections"]) {
         if (![sections containsObject:section])
@@ -215,15 +215,17 @@
 }
 
 - (bool) addSection:(NSString *)section {
-    if (record_ == nil)
+    if (!record_)
         return false;
     
-    [self performSelectorOnMainThread:@selector(_addSection:) withObject:section waitUntilDone:NO];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self _addSection:section];
+    });
     return true;
 }
 
 - (void) _removeSection:(NSString *)section {
-    if (record_ == nil)
+    if (!record_)
         return;
     
     if (NSMutableArray *sections = [record_ objectForKey:@"Sections"])
@@ -232,10 +234,12 @@
 }
 
 - (bool) removeSection:(NSString *)section {
-    if (record_ == nil)
+    if (!record_)
         return false;
     
-    [self performSelectorOnMainThread:@selector(_removeSection:) withObject:section waitUntilDone:NO];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self _removeSection:section];
+    });
     return true;
 }
 
@@ -245,7 +249,9 @@
 
 - (bool) remove {
     bool value(record_ != nil);
-    [self performSelectorOnMainThread:@selector(_remove) withObject:nil waitUntilDone:NO];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self _remove];
+    });
     return value;
 }
 
@@ -335,12 +341,16 @@
     else if (!fetches_.insert(uri).second)
         return;
     
-    [delegate_ performSelectorOnMainThread:@selector(setFetch:) withObject:[NSNumber numberWithBool:[self fetch]] waitUntilDone:NO];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [delegate_ setFetch:[NSNumber numberWithBool:[self fetch]]];
+    });
 }
 
 - (void) resetFetch {
     fetches_.clear();
-    [delegate_ performSelectorOnMainThread:@selector(setFetch:) withObject:[NSNumber numberWithBool:NO] waitUntilDone:NO];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [delegate_ setFetch:@NO];
+    });
 }
 
 @end

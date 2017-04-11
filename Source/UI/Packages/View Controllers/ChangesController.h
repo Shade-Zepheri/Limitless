@@ -13,6 +13,6 @@
     unsigned upgrades_;
 }
 
-- (id) initWithDatabase:(Database *)database;
+- (instancetype)initWithDatabase:(Database *)database;
 
 @end

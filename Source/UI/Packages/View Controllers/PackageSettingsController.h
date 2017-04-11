@@ -21,6 +21,6 @@
     _H<UITableViewCell> ignoredCell_;
 }
 
-- (id) initWithDatabase:(Database *)database package:(NSString *)package;
+- (instancetype)initWithDatabase:(Database *)database package:(NSString *)package;
 
 @end

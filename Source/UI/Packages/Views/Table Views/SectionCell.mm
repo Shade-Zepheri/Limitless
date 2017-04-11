@@ -12,8 +12,9 @@
 
 @implementation SectionCell
 
-- (id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) != nil) {
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
         icon_ = [UIImage imageNamed:@"folder.png"];
         // XXX: this initial frame is wrong, but is fixed later
         switch_ = [[[UISwitch alloc] initWithFrame:CGRectMake(218, 9, 60, 25)] autorelease];
@@ -32,7 +33,8 @@
         }
         
         [content_ setDelegate:self];
-    } return self;
+    }
+    return self;
 }
 
 - (void) onSwitch:(id)sender {

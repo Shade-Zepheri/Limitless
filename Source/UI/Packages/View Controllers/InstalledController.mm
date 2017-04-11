@@ -114,8 +114,9 @@
     return sections;
 }
 
-- (id) initWithDatabase:(Database *)database {
-    if ((self = [super initWithDatabase:database title:UCLocalize("INSTALLED")]) != nil) {
+- (instancetype)initWithDatabase:(Database *)database {
+    self = [super initWithDatabase:database title:UCLocalize("INSTALLED")];
+    if (self) {
         UISegmentedControl *segmented([[[UISegmentedControl alloc] initWithItems:@[
                                                                                    UCLocalize("USER"),
                                                                                    UCLocalize("EXPERT"),
@@ -129,7 +130,8 @@
         [self useFilter:segmented];
         
         [self queueStatusDidChange];
-    } return self;
+    }
+    return self;
 }
 
 #if !AlwaysReload
